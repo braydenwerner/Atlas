@@ -1,0 +1,5 @@
+node_modules/
+chrome-extension-images-54f42a565bbc.json
+.env
+ormconfig.json
+dist/

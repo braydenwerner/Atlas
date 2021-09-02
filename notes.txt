@@ -1,0 +1,26 @@
+Uploading:
+-Allow Users to upload their own images to use as background
+	-ApolloClient sends graphql query to backend, backend takes image gives it a random name, and sends it to
+	Google Cloud Storage bucket where it is accessable via a URL. Save this URL in the database along with the user's unique
+	Google Extension ID.
+
+
+Thoughts:
+Localstorage seems to be good for storing Todos because it is quick.
+The issue is, the database should contain the todos incase they are deleted
+somehow. Use localstorage if exists, otherwise fetch from database? I'm not
+sure if this is how things are supposed to be done.
+For simplicitly, will just store settings/preferences in local storage
+and more permanent stuff in the database. Todos will be in the database and
+will be fetched from the server on page load.
+
+It looks like many sites call from the database if localstorage returns null
+then saves the data in localstorage for quicker access.
+
+Or maybe they are using localstorage until that gets overriden by
+the database call afterwards. So while you are fetching from database
+you still have the previous local storage data?
+
+Todos:
+Store all todos by a user, with a flag isCompleted and a date isCompleted
+
