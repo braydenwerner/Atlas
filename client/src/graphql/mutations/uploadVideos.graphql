@@ -1,0 +1,8 @@
+mutation uploadVideos($files: [Upload!]!) {
+  uploadVideos(files: $files) {
+    errors {
+      field
+      message
+    }
+  }
+}

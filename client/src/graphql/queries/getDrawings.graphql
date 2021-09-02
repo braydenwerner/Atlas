@@ -1,0 +1,9 @@
+query getDrawings {
+  getDrawings {
+    id
+    imageData
+    isFavorite
+    updatedAt
+    createdAt
+  }
+}

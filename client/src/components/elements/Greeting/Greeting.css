@@ -1,0 +1,54 @@
+.react-clock {
+  margin-bottom: 35px;
+  color: white;
+}
+
+.react-clock__face {
+  border: 1px solid white;
+}
+
+[class*='react-clock__minute-mark'] {
+  background-color: white;
+}
+[class*='react-clock__hour-mark'] {
+  background-color: white;
+}
+[class*='react-clock__hour-hand__body'] {
+  background-color: white;
+}
+[class*='react-clock__minute-hand__body'] {
+  background-color: white;
+}
+
+.react-clock__mark.react-clock__minute-mark {
+  background-color: white;
+  color: white;
+}
+
+.react-clock__mark__number {
+  font-size: 1rem;
+}
+
+.color-picker-light {
+  top: 95px;
+}
+
+.color-picker-dark {
+  top: 95px;
+}
+
+[class*='twitter-picker color-picker-dark'] {
+  opacity: 0.8;
+}
+
+[class*='twitter-picker color-picker-dark'] > div {
+  background-color: #181818;
+}
+
+[class*='twitter-picker color-picker-light'] {
+  opacity: 0.8;
+}
+
+[class*='twitter-picker color-picker-light'] > div {
+  background-color: #ffff;
+}

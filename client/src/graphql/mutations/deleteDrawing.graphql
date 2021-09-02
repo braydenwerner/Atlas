@@ -1,0 +1,3 @@
+mutation deleteDrawing($id: Int!) {
+  deleteDrawing(id: $id)
+}

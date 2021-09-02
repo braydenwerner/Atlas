@@ -1,0 +1,3 @@
+mutation updateVideos($ids: [Int!]!, $isFavoriteArr: [Boolean!]!) {
+  updateVideos(ids: $ids, isFavoriteArr: $isFavoriteArr)
+}

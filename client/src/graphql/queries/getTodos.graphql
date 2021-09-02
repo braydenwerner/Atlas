@@ -1,0 +1,8 @@
+query getTodos {
+  getTodos {
+    id
+    title
+    isChecked
+    createdAt
+  }
+}

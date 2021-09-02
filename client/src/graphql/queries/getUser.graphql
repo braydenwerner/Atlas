@@ -1,0 +1,11 @@
+query getUser {
+  getUser {
+    name
+    email
+    country
+    photoURL
+    selectedUserBackground
+    colorTheme
+    greetingMessage
+  }
+}

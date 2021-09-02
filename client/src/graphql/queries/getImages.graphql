@@ -1,0 +1,8 @@
+query getImages {
+  getImages {
+    id
+    title
+    URL
+    isFavorite
+  }
+}

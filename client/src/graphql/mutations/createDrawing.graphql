@@ -1,0 +1,9 @@
+mutation createDrawing {
+  createDrawing {
+    id
+    imageData
+    isFavorite
+    updatedAt
+    createdAt
+  }
+}

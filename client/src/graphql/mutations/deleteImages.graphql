@@ -1,0 +1,8 @@
+mutation deleteImages($urls: [String!]!) {
+  deleteImages(urls: $urls) {
+    errors {
+      field
+      message
+    }
+  }
+}

@@ -1,0 +1,62 @@
+/* .wrapper-class-light {
+}
+
+.editor-class-light {
+}
+
+.toolbar-class-light {
+} */
+
+.wrapper-class-dark {
+  background-color: #181818;
+}
+
+.editor-class-dark {
+  height: 100%;
+  background-color: #181818;
+}
+
+.toolbar-class-dark {
+  border: none;
+  background-color: #181818;
+}
+
+.rdw-dropdownoption-default {
+  color: black;
+}
+
+.rdw-dropdown-selectedtext {
+  color: black;
+}
+
+.rdw-option-disabled {
+  display: none;
+}
+
+.rdw-option-wrapper:last-of-type {
+  display: none;
+}
+
+div[title='Undo'] {
+  display: flex;
+}
+
+div[title='Link'] {
+  display: none;
+}
+
+.rdw-inline-wrapper {
+  z-index: 1;
+}
+
+.rdw-list-wrapper {
+  z-index: 1;
+}
+
+.rdw-text-align-wrapper {
+  z-index: 1;
+}
+
+.rdw-history-wrapper {
+  z-index: 1;
+}

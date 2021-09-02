@@ -1,0 +1,3 @@
+mutation updateImages($ids: [Int!]!, $isFavoriteArr: [Boolean!]!) {
+  updateImages(ids: $ids, isFavoriteArr: $isFavoriteArr)
+}

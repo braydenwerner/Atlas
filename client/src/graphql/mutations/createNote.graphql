@@ -1,0 +1,9 @@
+mutation createNote {
+  createNote {
+    id
+    body
+    isFavorite
+    updatedAt
+    createdAt
+  }
+}

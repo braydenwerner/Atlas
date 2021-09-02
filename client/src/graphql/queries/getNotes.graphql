@@ -1,0 +1,9 @@
+query getNotes {
+  getNotes {
+    id
+    body
+    isFavorite
+    updatedAt
+    createdAt
+  }
+}

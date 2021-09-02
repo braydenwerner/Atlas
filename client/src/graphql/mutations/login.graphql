@@ -1,0 +1,8 @@
+mutation login($uid: String!) {
+  login(uid: $uid) {
+    token
+    errors {
+      message
+    }
+  }
+}

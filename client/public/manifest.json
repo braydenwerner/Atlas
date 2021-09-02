@@ -1,0 +1,24 @@
+{
+  "short_name": "Innodesk",
+  "name": "Innodesk",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAthywZt/V9jvqpFWhatQqcMBY/mSsxKj6rhxV81quJH+UZ+3y4sbrsZxmL60bBAzrc+TgUAzj0EYIscHb2CRGLtiaek9vYqWZKE/SMGmblRwq/kRQfAuRHfN/G4ufGZNbtMRyjlloB6G4oUkw7/1JAxk1Uv037cW1OQjVE7RyK248YM9oTIFAkKrfw6VKVbyZbgdn3qEstWhCdqu6WCxuiGP87V+sPjU/m9yVKl35jTlqZHCNZuhMdeVW7M5jhxopo2AkN8fCeDasdvlRdU6fQ9r6GyR3MHMKWNqRMIHwizOQXMyrlKUm02e+hC1wLxTwb1RM/L23+bgHyQuPC9ZstwIDAQAB",
+  "description": "A comprehensive tool for drawing, taking notes, and staying organized all on your chrome homepage.",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": ["<all_urls>"],
+  "browser_action": {
+    "default_icon": {
+      "16": "./images/brayden_game_character_front.png",
+      "48": "./images/brayden_game_character_front.png"
+    }
+  },
+  "icons": {
+    "16": "./images/brayden_game_character_front.png",
+    "48": "./images/brayden_game_character_front.png",
+    "128": "./images/brayden_game_character_front.png"
+  }
+}

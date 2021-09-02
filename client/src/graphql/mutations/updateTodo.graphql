@@ -1,0 +1,3 @@
+mutation updateTodo($id: Int!, $data: UpdateTodoInput!) {
+  updateTodo(id: $id, data: $data)
+}
