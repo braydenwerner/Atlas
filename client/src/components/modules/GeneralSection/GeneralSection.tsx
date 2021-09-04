@@ -81,12 +81,12 @@ export const GeneralSection: React.FC = () => {
             <ToggleSwitch component="showingStocksWidget" />
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow> */}
-        <Styled.CustomizationRow>
+        {/* <Styled.CustomizationRow>
           <Styled.CustomizationLabel>Search Bar</Styled.CustomizationLabel>
           <Styled.SubOptionContainer>
             <ToggleSwitch component="showingSearchbar" />
           </Styled.SubOptionContainer>
-        </Styled.CustomizationRow>
+        </Styled.CustomizationRow> */}
       </Styled.CustomizationContainer>
       <Styled.GeneralSubHeader>Customization</Styled.GeneralSubHeader>
       <Styled.CustomizationContainer>

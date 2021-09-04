@@ -29,12 +29,13 @@ export const GreetingsContainer = styled.div<ClockProps>`
   border-radius: 10px;
   opacity: 0.98;
   width: 320px;
+  max-height: 300px;
   user-select: none;
   height: ${(props) => (props.$usingDigitalClock ? '250px' : '300px')};
 `
 
 export const TimeContainer = styled.div<ColorProps>`
-  font-size: 7.5rem;
+  font-size: 8.5rem;
   color: ${(props) => props.color};
 `
 
@@ -65,7 +66,8 @@ export const UpdatingGreetingMessageInput = styled.input<ColorProps>`
   font-family: 'Open Sans', sans-serif;
   text-align: center;
   border: none;
-  width: 100%;
+  background-color: orange;
+  max-width: 300px;
   outline: none;
   color: ${(props) => props.color};
   background-color: transparent;
@@ -76,7 +78,8 @@ export const GreetingIconsContainer = styled.div<ClockProps>`
   position: absolute;
   justify-content: space-around;
   width: 100px;
-  top: ${(props) => (props.$usingDigitalClock ? '205px' : '280px')};
+  margin-top: 25px;
+  top: ${(props) => (props.$usingDigitalClock ? '205px' : '260px')};
 `
 
 export const EditGreetingIcon = styled(BiPencil)<ColorProps>`
@@ -89,13 +92,15 @@ export const EditColorIcon = styled(IoIosColorPalette)<ColorProps>`
   color: ${(props) => props.color};
 `
 
+export const ColorPickerContainer = styled.div``
+
 export const TriangleIcon = styled(VscTriangleUp)<
   ClockProps & ContainerColorProps
 >`
   position: absolute;
   right: 118px;
   opacity: 0.8;
-  top: ${(props) => (props.$usingDigitalClock ? '239px' : '311px')};
+  top: ${(props) => (props.$usingDigitalClock ? '262px' : '312px')};
   color: ${(props) => props.theme.primaryContainer};
   color: ${(props) => props.containerColor};
 `

@@ -39,6 +39,7 @@ export const Greeting: React.FC<GreetingProps> = ({
   const [hoveringGreeting, setHoveringGreeting] = useState(false)
   const [updatingMessage, setUpdatingMessage] = useState(false)
   const [displayColorPicker, setDisplayColorPicker] = useState(false)
+  const [draggableDisabled, setDraggableDisabled] = useState(false)
 
   const [updateUser] = useUpdateUserMutation()
 
@@ -87,6 +88,7 @@ export const Greeting: React.FC<GreetingProps> = ({
           x: 0.4,
           y: 0.4,
         }}
+        draggableDisabled={draggableDisabled}
       >
         <Styled.GreetingsContainer
           $usingDigitalClock={usingDigitalClock}
@@ -118,8 +120,8 @@ export const Greeting: React.FC<GreetingProps> = ({
               >
                 <Styled.UpdatingGreetingMessageInput
                   color={greetingColor}
-                  maxLength={50}
                   ref={messageFormRef}
+                  maxLength={50}
                   autoFocus
                   placeholder={
                     greetingMessage !== 'null'
@@ -153,7 +155,10 @@ export const Greeting: React.FC<GreetingProps> = ({
             )}
           </Styled.GreetingMessageContainer>
           {displayColorPicker && (
-            <>
+            <Styled.ColorPickerContainer
+              onMouseEnter={() => setDraggableDisabled(true)}
+              onMouseLeave={() => setDraggableDisabled(false)}
+            >
               <Styled.TriangleIcon
                 containerColor={containerColor}
                 $usingDigitalClock={usingDigitalClock}
@@ -164,7 +169,7 @@ export const Greeting: React.FC<GreetingProps> = ({
                 triangle="hide"
                 onChangeComplete={(color) => switchGreetingColor(color.hex)}
               />
-            </>
+            </Styled.ColorPickerContainer>
           )}
         </Styled.GreetingsContainer>
       </DynamicContainer>
