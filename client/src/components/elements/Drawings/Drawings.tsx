@@ -141,26 +141,7 @@ export const Drawings: React.FC = () => {
                 backgroundColor={strokeColor}
                 onClick={() => setToggleColorPicker(!toggleColorPicker)}
               />
-              {toggleColorPicker && (
-                <Styled.ColorPicker
-                  colors={[
-                    '#000000',
-                    '#B80000',
-                    '#DB3E00',
-                    '#FCCB00',
-                    '#008B02',
-                    '#1273DE',
-                    '#004DCF',
-                    '#5300EB',
-                  ]}
-                  triangle="hide"
-                  onChangeComplete={(color) => {
-                    canvasRef.current.eraseMode(false)
-                    setStrokeColor(color.hex)
-                    setUseEraser(false)
-                  }}
-                />
-              )}
+
               {/* <Styled.WidthSelector> </Styled.WidthSelector> */}
               <Styled.EraserIcon
                 size={32}
@@ -220,6 +201,31 @@ export const Drawings: React.FC = () => {
                 }}
               />
             </Styled.ButtonsContainer>
+            {toggleColorPicker && (
+              <Styled.ColorPickerContainer
+                onMouseEnter={() => setDraggableDisabled(true)}
+                onMouseLeave={() => setDraggableDisabled(false)}
+              >
+                <Styled.ColorPicker
+                  colors={[
+                    '#000000',
+                    '#B80000',
+                    '#DB3E00',
+                    '#FCCB00',
+                    '#008B02',
+                    '#1273DE',
+                    '#004DCF',
+                    '#5300EB',
+                  ]}
+                  triangle="hide"
+                  onChangeComplete={(color) => {
+                    canvasRef.current.eraseMode(false)
+                    setStrokeColor(color.hex)
+                    setUseEraser(false)
+                  }}
+                />
+              </Styled.ColorPickerContainer>
+            )}
             <Styled.DrawingContainer
               onMouseEnter={() => setDraggableDisabled(true)}
               onMouseLeave={() => setDraggableDisabled(false)}

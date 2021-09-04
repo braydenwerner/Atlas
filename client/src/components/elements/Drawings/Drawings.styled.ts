@@ -4,7 +4,7 @@ import { FaUndo, FaRedo } from 'react-icons/fa'
 import { IoIosTrash, IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 
 import { BiEraser } from 'react-icons/bi'
-import { GithubPicker } from 'react-color'
+import { TwitterPicker } from 'react-color'
 import { ContainerColorProps } from '../../../styles/constantStyles'
 
 interface ToggleViewProps {
@@ -53,10 +53,13 @@ export const ColorPickerIcon = styled.div<ColorPickerIconProps>`
   outline: solid 2px white;
   background-color: ${(props) => props.backgroundColor};
 `
-export const ColorPicker = styled(GithubPicker)`
+
+export const ColorPickerContainer = styled.div``
+
+export const ColorPicker = styled(TwitterPicker)`
   position: absolute !important;
   top: 55px;
-  right: 215px;
+  right: 149px;
 `
 
 export const ColorSelector = styled.div`

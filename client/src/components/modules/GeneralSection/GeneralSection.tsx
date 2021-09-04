@@ -128,7 +128,7 @@ export const GeneralSection: React.FC = () => {
               >
                 Light
               </Styled.SubOption>
-              <Styled.SubOption
+              {/* <Styled.SubOption
                 isSelected={showCustomThemeSelection}
                 onClick={() =>
                   setShowCustomThemeSelection(
@@ -137,7 +137,7 @@ export const GeneralSection: React.FC = () => {
                 }
               >
                 Custom
-              </Styled.SubOption>
+              </Styled.SubOption> */}
             </Styled.SubOptionContainer>
           </Styled.CustomizationRow>
           <Styled.ThemeColorSliderContainer>
