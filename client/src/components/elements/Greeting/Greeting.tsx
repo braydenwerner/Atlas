@@ -73,15 +73,14 @@ export const Greeting: React.FC<GreetingProps> = ({
 
   return (
     <>
-      {updatingMessage ||
-        (displayColorPicker && (
-          <Styled.Overlay
-            onClick={() => {
-              setUpdatingMessage(false)
-              setDisplayColorPicker(false)
-            }}
-          />
-        ))}
+      {(updatingMessage || displayColorPicker) && (
+        <Styled.Overlay
+          onClick={() => {
+            setUpdatingMessage(false)
+            setDisplayColorPicker(false)
+          }}
+        />
+      )}
       <DynamicContainer
         nodeTitle="Greeting"
         defaultLocation={{
