@@ -82,7 +82,6 @@ export const EraserIcon = styled(BiEraser)<EraserIconProps>`
 export const UndoIcon = styled(FaUndo)`
   color: ${(props) => props.theme.primaryText};
   position: relative;
-  color: white;
   cursor: pointer;
 `
 

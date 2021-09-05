@@ -9,7 +9,7 @@ const theme = {
     secondaryText: '#808080',
     primaryContrast: '',
     dividerLine: '2px solid rgba(0,0,0,0.1)',
-    minimizeButton: '#d3d3d3',
+    minimizeButton: '#222222',
   },
   dark: {
     theme: 'dark',
