@@ -104,6 +104,7 @@ interface WhiteboardProps {
 }
 export const Whiteboard = styled(ReactSketchCanvas)<WhiteboardProps>`
   svg {
+    ${(props) => props.theme.theme === 'light' && 'border: 1px solid black'};
     border-radius: 10px;
     background: ${(props) => `url(${props.background})`};
   }

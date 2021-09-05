@@ -227,6 +227,7 @@ export const Drawings: React.FC = () => {
               </Styled.ColorPickerContainer>
             )}
             <Styled.DrawingContainer
+              onClick={() => setToggleColorPicker(false)}
               onMouseEnter={() => setDraggableDisabled(true)}
               onMouseLeave={() => setDraggableDisabled(false)}
             >
