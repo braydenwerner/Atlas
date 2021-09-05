@@ -3,6 +3,7 @@ import { MdCancel, MdCheckCircle } from 'react-icons/md'
 import Switch from 'react-switch'
 
 import {
+  ThemeContext,
   OtherSettingsContext,
   VisiblityToggleContext,
 } from '../../../providers/index'
@@ -23,6 +24,7 @@ interface ToggleVisibilitySwitchProps {
 export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
   component,
 }) => {
+  const { themeMode } = useContext(ThemeContext)
   const { componentVisiblity, toggleVisibility } = useContext(
     VisiblityToggleContext
   )
@@ -40,8 +42,10 @@ export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
       width={60}
       handleDiameter={10}
       activeBoxShadow="false"
-      onColor="#222222"
-      offColor="#222222"
+      onHandleColor={themeMode === 'dark' ? '#FFFF' : '#0000'}
+      offHandleColor={themeMode === 'dark' ? '#FFFF' : '#0000'}
+      onColor={themeMode === 'dark' ? '#222222' : '#D1D1D1'}
+      offColor={themeMode === 'dark' ? '#222222' : '#D1D1D1'}
       checkedIcon={
         <MdCancel
           style={{
@@ -52,7 +56,7 @@ export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
             fontSize: 18,
             paddingLeft: 5,
           }}
-          color="gray"
+          color={themeMode === 'dark' ? 'gray' : 'black'}
         />
       }
       uncheckedIcon={
@@ -65,7 +69,7 @@ export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
             fontSize: 18,
             paddingLeft: 14,
           }}
-          color="gray"
+          color={themeMode === 'dark' ? 'gray' : 'black'}
         />
       }
       onChange={() => {
