@@ -4,7 +4,7 @@ const theme = {
   light: {
     theme: 'light',
     primaryContainer: '#ffff',
-    secondaryContainer: '#ffff',
+    secondaryContainer: '#D1D1D1',
     primaryText: '#000000',
     secondaryText: '#808080',
     primaryContrast: '',

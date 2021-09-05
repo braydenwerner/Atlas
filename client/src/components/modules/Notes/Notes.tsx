@@ -139,7 +139,6 @@ export const Notes: React.FC = () => {
                           />
                         )
                     )}
-                )
               </Styled.SidebarContainer>
               <Styled.EditorContainer fullscreen={fullscreen}>
                 {selectedNote && (
