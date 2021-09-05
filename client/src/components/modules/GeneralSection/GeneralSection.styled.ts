@@ -51,6 +51,7 @@ export const CustomizationColumn = styled.div`
 
 export const CustomizationLabel = styled.div`
   position: relative;
+  font-size: 1rem;
   top: 8px;
   left: 15px;
   width: 50%;
