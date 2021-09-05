@@ -11,7 +11,7 @@ export const GeneralSection: React.FC = () => {
   const { themeMode, setTheme } = useContext(ThemeContext)
   const {
     usingDigitalClock,
-    toggleUsingDigitalClock,
+    setUsingDigitalClock,
     greetingColor,
     switchGreetingColor,
     containerColor,
@@ -173,14 +173,14 @@ export const GeneralSection: React.FC = () => {
           <Styled.SubOptionContainer>
             <Styled.SubOption
               isSelected={usingDigitalClock}
-              onClick={toggleUsingDigitalClock}
+              onClick={() => setUsingDigitalClock(true)}
             >
               Digital
             </Styled.SubOption>
             <Styled.SubOption
               style={{ marginRight: '12px' }}
               isSelected={!usingDigitalClock}
-              onClick={toggleUsingDigitalClock}
+              onClick={() => setUsingDigitalClock(false)}
             >
               Analog
             </Styled.SubOption>

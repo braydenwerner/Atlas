@@ -7,7 +7,7 @@ export const OtherSettingsContext = createContext({
   greetingColor: '#FFFFFF',
   containerColor: '',
   usingRandomWallpaper: true,
-  toggleUsingDigitalClock: () => {
+  setUsingDigitalClock: (_usingDigitalClock: boolean) => {
     return
   },
   switchGreetingColor: (color: string) => {
@@ -22,7 +22,7 @@ export const OtherSettingsContext = createContext({
 })
 
 export const OtherSettingsProvider: React.FC = ({ children }) => {
-  const [usingDigitalClock, setUsingDigitalClock] = useLocalStorage(
+  const [usingDigitalClock, _setUsingDigitalClock] = useLocalStorage(
     'usingDigitalClock',
     true
   )
@@ -39,8 +39,8 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
     true
   )
 
-  const toggleUsingDigitalClock = () => {
-    setUsingDigitalClock((oldUsingDigitalClock) => !oldUsingDigitalClock)
+  const setUsingDigitalClock = (_usingDigitalClock: boolean) => {
+    _setUsingDigitalClock(_usingDigitalClock)
   }
 
   const switchGreetingColor = (color: string) => {
@@ -63,7 +63,7 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
       greetingColor,
       containerColor,
       usingRandomWallpaper,
-      toggleUsingDigitalClock,
+      setUsingDigitalClock,
       switchGreetingColor,
       switchContainerColor,
       toggleUsingRandomWallpaper,

@@ -42,12 +42,6 @@ export const WeatherWidgetItem = styled.div`
   color: ${(props) => props.theme.primaryText};
 `
 
-const IconAnimation = keyframes`
-  100% {
-    transform: translate(0,-2px);
-  }
-`
-
 export const RefetchIcon = styled(BiRefresh)`
   margin: auto;
   color: ${(props) => props.theme.primaryText};
@@ -55,9 +49,6 @@ export const RefetchIcon = styled(BiRefresh)`
 
   &:hover {
     filter: brightness(100%);
-    animation-name: ${IconAnimation};
-    animation-duration: 0.1s;
-    animation-fill-mode: forwards;
   }
 `
 export const BackIcon = styled(TiArrowBack)`
@@ -67,9 +58,6 @@ export const BackIcon = styled(TiArrowBack)`
 
   &:hover {
     filter: brightness(100%);
-    animation-name: ${IconAnimation};
-    animation-duration: 0.1s;
-    animation-fill-mode: forwards;
   }
 `
 
@@ -80,9 +68,6 @@ export const TemperatureIcon = styled(FaThermometerHalf)`
 
   &:hover {
     filter: brightness(100%);
-    animation-name: ${IconAnimation};
-    animation-duration: 0.1s;
-    animation-fill-mode: forwards;
   }
 `
 
