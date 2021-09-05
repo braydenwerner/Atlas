@@ -1,6 +1,10 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { useGetVideosQuery } from '../../../generated/graphql'
+import {
+  ScrollDownContainer,
+  ScrollDownIndicator,
+} from '../../../styles/constantStyles'
 import { UploadFile, UserVideos } from '../index'
 import * as Styled from './VideoSection.styled'
 
@@ -17,6 +21,18 @@ export const VideoSection: React.FC<ImageSectionProps> = ({
   selectedBackground,
   setSelectedBackground,
 }) => {
+  const [hasScrolled, setHasScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setHasScrolled(true)
+
+    window.addEventListener('scroll', handleScroll, true)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   const { data } = useGetVideosQuery()
   const videoData = data && data.getVideos
 
@@ -40,6 +56,11 @@ export const VideoSection: React.FC<ImageSectionProps> = ({
       {selectedVideoOption === 'My Videos' && (
         <Styled.ContentContainer>
           <UploadFile fileType="video" />
+          {videoData && videoData.length > 0 && !hasScrolled && (
+            <ScrollDownContainer>
+              <ScrollDownIndicator size={28} />
+            </ScrollDownContainer>
+          )}
           <UserVideos
             videoData={videoData}
             selectedBackground={selectedBackground}

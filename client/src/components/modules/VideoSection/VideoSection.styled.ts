@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import { BsChevronDoubleDown } from 'react-icons/bs'
+import styled, { keyframes } from 'styled-components'
 
 export const VideoSectionContainer = styled.div`
   margin: 0px 15px 0px 15px;

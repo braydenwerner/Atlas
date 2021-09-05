@@ -42,8 +42,8 @@ export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
       width={60}
       handleDiameter={10}
       activeBoxShadow="false"
-      onHandleColor={themeMode === 'dark' ? '#FFFF' : '#0000'}
-      offHandleColor={themeMode === 'dark' ? '#FFFF' : '#0000'}
+      onHandleColor={themeMode === 'dark' ? '#FFFFFF' : '#000000'}
+      offHandleColor={themeMode === 'dark' ? '#FFFFFF' : '#000000'}
       onColor={themeMode === 'dark' ? '#222222' : '#D1D1D1'}
       offColor={themeMode === 'dark' ? '#222222' : '#D1D1D1'}
       checkedIcon={
