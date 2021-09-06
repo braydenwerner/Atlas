@@ -27,6 +27,26 @@ export const RandomImageContainer = styled.div`
   justify-content: space-between;
 `
 
+export const SaveWallpaperContainer = styled.div`
+  display: flex;
+  margin: 15px 0px 0px 25px;
+  margin-top: 15px;
+  width: 88%;
+  justify-content: space-between;
+`
+
+export const SaveWallpaperText = styled.div`
+  font-size: 1rem;
+  padding: 0.5em;
+  cursor: pointer;
+  color: ${(props) => props.theme.secondaryText};
+
+  &:hover {
+    filter: ${(props) =>
+      props.theme.theme === 'dark' ? 'brightness(150%)' : 'brightness(75%)'};
+  }
+`
+
 export const ImageSelectorContainer = styled.div`
   display: flex;
   justify-content: space-around;

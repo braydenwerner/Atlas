@@ -7,22 +7,26 @@ export const OtherSettingsContext = createContext({
   greetingColor: '#FFFFFF',
   containerColor: '',
   usingRandomWallpaper: true,
-  setUsingDigitalClock: (_usingDigitalClock: boolean) => {
+  randomWallpaperURL: '',
+  setUsingDigitalClock: (usingDigitalClock: boolean) => {
     return
   },
-  switchGreetingColor: (color: string) => {
+  setGreetingColor: (color: string) => {
     return
   },
-  switchContainerColor: (color: string) => {
+  setContainerColor: (color: string) => {
     return
   },
   toggleUsingRandomWallpaper: () => {
     return
   },
+  setRandomWallpaperURL: (url: string) => {
+    return
+  },
 })
 
 export const OtherSettingsProvider: React.FC = ({ children }) => {
-  const [usingDigitalClock, _setUsingDigitalClock] = useLocalStorage(
+  const [usingDigitalClock, setUsingDigitalClock] = useLocalStorage(
     'usingDigitalClock',
     true
   )
@@ -38,18 +42,10 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
     'randomWallpaper',
     true
   )
-
-  const setUsingDigitalClock = (_usingDigitalClock: boolean) => {
-    _setUsingDigitalClock(_usingDigitalClock)
-  }
-
-  const switchGreetingColor = (color: string) => {
-    setGreetingColor(color)
-  }
-
-  const switchContainerColor = (color: string) => {
-    setContainerColor(color)
-  }
+  const [randomWallpaperURL, setRandomWallpaperURL] = useLocalStorage(
+    'randomWallpaperURL',
+    ''
+  )
 
   const toggleUsingRandomWallpaper = () => {
     setUsingRandomWallpaper(
@@ -63,12 +59,20 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
       greetingColor,
       containerColor,
       usingRandomWallpaper,
+      randomWallpaperURL,
       setUsingDigitalClock,
-      switchGreetingColor,
-      switchContainerColor,
+      setGreetingColor,
+      setContainerColor,
       toggleUsingRandomWallpaper,
+      setRandomWallpaperURL,
     }),
-    [usingDigitalClock, greetingColor, containerColor, usingRandomWallpaper]
+    [
+      usingDigitalClock,
+      greetingColor,
+      containerColor,
+      usingRandomWallpaper,
+      randomWallpaperURL,
+    ]
   )
   return (
     <OtherSettingsContext.Provider value={settingsValue}>

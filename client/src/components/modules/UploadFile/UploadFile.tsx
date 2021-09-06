@@ -73,7 +73,6 @@ export const UploadFile: React.FC<UploadFile> = ({ fileType }) => {
 
   useEffect(() => {
     if (fileRejections.length > 0 && fileRejections[0].errors[0].message) {
-      console.log(fileRejections[0].errors[0].message)
       setSnackBarOpen(true)
       setErrorMessage(fileRejections[0].errors[0].message)
     }

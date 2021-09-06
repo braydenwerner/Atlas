@@ -13,9 +13,9 @@ export const GeneralSection: React.FC = () => {
     usingDigitalClock,
     setUsingDigitalClock,
     greetingColor,
-    switchGreetingColor,
+    setGreetingColor,
     containerColor,
-    switchContainerColor,
+    setContainerColor,
   } = useContext(OtherSettingsContext)
 
   const [showCustomThemeSelection, setShowCustomThemeSelection] =
@@ -103,7 +103,7 @@ export const GeneralSection: React.FC = () => {
                   setShowCustomThemeSelection(false)
                   //  set to empty string, will default to either dark or light
                   _setContainerColor('')
-                  switchContainerColor('')
+                  setContainerColor('')
 
                   updateUser({
                     variables: { data: { colorTheme: 'dark' } },
@@ -119,7 +119,7 @@ export const GeneralSection: React.FC = () => {
                   setShowCustomThemeSelection(false)
                   //  set to empty string, will default to either dark or light
                   _setContainerColor('')
-                  switchContainerColor('')
+                  setContainerColor('')
 
                   updateUser({
                     variables: { data: { colorTheme: 'light' } },
@@ -149,7 +149,7 @@ export const GeneralSection: React.FC = () => {
                     onChangeComplete={(color) => {
                       _setContainerColor(color.hex)
                       setColorInfo(color)
-                      switchContainerColor(color.hex)
+                      setContainerColor(color.hex)
                     }}
                   />
                 </Styled.SliderPickerContainer>
@@ -195,7 +195,7 @@ export const GeneralSection: React.FC = () => {
               color={_greetingColor}
               onChangeComplete={(color) => {
                 _setGreetingColor(color.hex)
-                switchGreetingColor(color.hex)
+                setGreetingColor(color.hex)
               }}
             />
           </Styled.SliderPickerContainer>

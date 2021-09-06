@@ -1,0 +1,8 @@
+mutation addImage($url: String!) {
+  addImage(url: $url) {
+    errors {
+      message
+      field
+    }
+  }
+}

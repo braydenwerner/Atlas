@@ -29,12 +29,8 @@ export const Greeting: React.FC<GreetingProps> = ({
   setGreetingMessage,
 }) => {
   const { themeMode } = useContext(ThemeContext)
-  const {
-    usingDigitalClock,
-    greetingColor,
-    switchGreetingColor,
-    containerColor,
-  } = useContext(OtherSettingsContext)
+  const { usingDigitalClock, greetingColor, setGreetingColor, containerColor } =
+    useContext(OtherSettingsContext)
 
   const [hoveringGreeting, setHoveringGreeting] = useState(false)
   const [updatingMessage, setUpdatingMessage] = useState(false)
@@ -166,7 +162,7 @@ export const Greeting: React.FC<GreetingProps> = ({
               <TwitterPicker
                 className={`color-picker-${themeMode}`}
                 triangle="hide"
-                onChangeComplete={(color) => switchGreetingColor(color.hex)}
+                onChangeComplete={(color) => setGreetingColor(color.hex)}
               />
             </Styled.ColorPickerContainer>
           )}

@@ -6,9 +6,9 @@ import React, {
   RefObject,
 } from 'react'
 
+import { OtherSettingsContext } from '../../../providers'
 import { getWallpaperData } from '../../../api/UnsplashAPI'
 import defaultBackground from '../../../images/innodesk-signin-homepage.jpg'
-import { OtherSettingsContext } from '../../../providers'
 import * as Styled from './Background.styled'
 
 interface BackgroundProps {
@@ -17,10 +17,11 @@ interface BackgroundProps {
 
 export const Background: React.FC<BackgroundProps> = React.memo(
   ({ selectedBackground }) => {
-    const { usingRandomWallpaper } = useContext(OtherSettingsContext)
+    const { usingRandomWallpaper, setRandomWallpaperURL } =
+      useContext(OtherSettingsContext)
 
-    const [wallpaper, setWallpaper] = useState()
-    const [fetching, setFetching] = useState(false)
+    const [wallpaper, setWallpaper] = useState<string>()
+    const [, setFetching] = useState(false)
     const [errors, setErrors] = useState(false)
 
     const videoRef = useRef() as RefObject<HTMLVideoElement> | null | undefined
@@ -52,7 +53,9 @@ export const Background: React.FC<BackgroundProps> = React.memo(
       }
     }, [selectedBackground])
 
-    if (usingRandomWallpaper && !errors) {
+    if (wallpaper && usingRandomWallpaper && !errors) {
+      if (typeof wallpaper === 'string') setRandomWallpaperURL(wallpaper)
+
       return <Styled.BackgroundImage image={wallpaper} />
     } else {
       if (selectedBackground && selectedBackground.endsWith('mp4')) {
@@ -64,7 +67,8 @@ export const Background: React.FC<BackgroundProps> = React.memo(
       } else if (
         selectedBackground &&
         (selectedBackground.endsWith('jpeg') ||
-          selectedBackground.endsWith('png'))
+          selectedBackground.endsWith('png') ||
+          selectedBackground.startsWith('https://images.unsplash.com'))
       ) {
         return <Styled.BackgroundImage image={selectedBackground} />
       } else {
