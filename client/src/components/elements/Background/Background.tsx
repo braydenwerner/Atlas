@@ -5,11 +5,13 @@ import React, {
   useState,
   RefObject,
 } from 'react'
+import moment from 'moment'
 
 import { OtherSettingsContext } from '../../../providers'
 import { getWallpaperData } from '../../../api/UnsplashAPI'
 import defaultBackground from '../../../images/atlas-background.jpg'
 import * as Styled from './Background.styled'
+import useLocalStorage from '../../../hooks/useLocalStorage'
 
 interface BackgroundProps {
   selectedBackground?: string
@@ -17,17 +19,39 @@ interface BackgroundProps {
 
 export const Background: React.FC<BackgroundProps> = React.memo(
   ({ selectedBackground }) => {
-    const { usingRandomWallpaper, setRandomWallpaperURL } =
+    const { usingRandomWallpaper, randomWallpaperURL, setRandomWallpaperURL } =
       useContext(OtherSettingsContext)
 
-    const [wallpaper, setWallpaper] = useState<string>()
+    const [lastFetched, setLastFetched] = useLocalStorage(
+      'wallpaperLastFetched',
+      ''
+    )
+
+    const [randomWallpaper, setRandomWallpaper] = useState<string>()
     const [, setFetching] = useState(false)
     const [errors, setErrors] = useState(false)
 
     const videoRef = useRef() as RefObject<HTMLVideoElement> | null | undefined
 
     useEffect(() => {
-      if (usingRandomWallpaper) fetchWallpaper()
+      console.log('use effect r')
+      if (usingRandomWallpaper) {
+        const date = new Date()
+
+        //  if the random wallpaper does not exist, or a day has passed
+        if (
+          !randomWallpaperURL ||
+          lastFetched === '' ||
+          moment(
+            `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+          ).diff(moment(lastFetched), 'days') >= 1
+        ) {
+          fetchWallpaper()
+          //  use the preexisting random wallpaper
+        } else {
+          setRandomWallpaper(randomWallpaperURL)
+        }
+      }
     }, [usingRandomWallpaper])
 
     const fetchWallpaper = async () => {
@@ -35,7 +59,12 @@ export const Background: React.FC<BackgroundProps> = React.memo(
       const { data, errors } = await getWallpaperData()
 
       if (data && errors.length === 0) {
-        setWallpaper(data.urls.full)
+        const date = new Date()
+        setLastFetched(
+          `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+        )
+        setRandomWallpaper(data.urls.full)
+        setRandomWallpaperURL(data.urls.full)
       }
 
       if (errors?.length > 0) {
@@ -53,10 +82,8 @@ export const Background: React.FC<BackgroundProps> = React.memo(
       }
     }, [selectedBackground])
 
-    if (wallpaper && usingRandomWallpaper && !errors) {
-      if (typeof wallpaper === 'string') setRandomWallpaperURL(wallpaper)
-
-      return <Styled.BackgroundImage image={wallpaper} />
+    if (randomWallpaper && usingRandomWallpaper && !errors) {
+      return <Styled.BackgroundImage image={randomWallpaper} />
     } else {
       if (selectedBackground && selectedBackground.endsWith('mp4')) {
         return (
