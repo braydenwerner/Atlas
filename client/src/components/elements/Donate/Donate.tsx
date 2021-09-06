@@ -18,7 +18,7 @@ export const Donate: React.FC<DonateProps> = ({ setShowingDonate }) => {
         </Styled.DonateDescription>
         <Styled.PaymentOptionContainer>
           <Styled.PaymentOption
-            href="https://www.buymeacoffee.com/Innodesk"
+            href="https://www.buymeacoffee.com/AtlasExtension"
             target="_blank"
             aria-label="buy-me-a-coffee"
           >

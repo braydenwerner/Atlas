@@ -30,11 +30,11 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
     'usingDigitalClock',
     true
   )
-  const [greetingColor, setGreetingColor] = useLocalStorage(
+  const [greetingColor, _setGreetingColor] = useLocalStorage(
     'greetingColor',
     '#FFFFFF'
   )
-  const [containerColor, setContainerColor] = useLocalStorage(
+  const [containerColor, _setContainerColor] = useLocalStorage(
     'containerColor',
     ''
   )
@@ -42,10 +42,24 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
     'randomWallpaper',
     true
   )
-  const [randomWallpaperURL, setRandomWallpaperURL] = useLocalStorage(
+  const [randomWallpaperURL, _setRandomWallpaperURL] = useLocalStorage(
     'randomWallpaperURL',
     ''
   )
+
+  //  passing the setState directly into the memo gives error:
+  //  Cannot update a component (`OtherSettingsProvider`) while rendering a different component
+  const setGreetingColor = (color: string) => {
+    _setGreetingColor(color)
+  }
+
+  const setContainerColor = (color: string) => {
+    _setContainerColor(color)
+  }
+
+  const setRandomWallpaperURL = (url: string) => {
+    _setRandomWallpaperURL(url)
+  }
 
   const toggleUsingRandomWallpaper = () => {
     setUsingRandomWallpaper(

@@ -8,7 +8,7 @@ import React, {
 
 import { OtherSettingsContext } from '../../../providers'
 import { getWallpaperData } from '../../../api/UnsplashAPI'
-import defaultBackground from '../../../images/innodesk-signin-homepage.jpg'
+import defaultBackground from '../../../images/atlas-background.jpg'
 import * as Styled from './Background.styled'
 
 interface BackgroundProps {

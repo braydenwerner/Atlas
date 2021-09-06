@@ -1,4 +1,4 @@
-import signInBackground from '../../../images/innodesk-signin-homepage.jpg'
+import signInBackground from '../../../images/atlas-background.jpg'
 import styled, { keyframes } from 'styled-components'
 
 export const FormContainer = styled.div`
