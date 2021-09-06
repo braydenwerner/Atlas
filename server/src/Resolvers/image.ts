@@ -17,7 +17,7 @@ import { MyContext } from '../types'
 import { Image } from '../Entities/index'
 import { bucket } from '../index'
 import { getUserId } from '../utils'
-import { MAX_IMAGE_UPLOADS } from '../constants/constants'
+import { MAX_IMAGE_SAVED, MAX_IMAGE_UPLOADS } from '../constants/constants'
 
 @ObjectType()
 class ImageResponse {
@@ -102,6 +102,7 @@ export class ImageResolver {
     @Ctx() ctx: MyContext,
     @Arg('urls', () => [String]) urls: string[]
   ) {
+    console.log(urls)
     const uid = getUserId(ctx)
 
     for (const url of urls) {
@@ -109,7 +110,13 @@ export class ImageResolver {
         'https://storage.googleapis.com/chrome-extension-bucket/'
       )[1]
       try {
-        await bucket.file(fileName).delete()
+        //  some images are saved that are not in the storage bucket
+        //  (url obtained from an API), if this is the case do not try to delete it
+        const image = await Image.findOne({ where: { uid, URL: url } })
+
+        if (image && image.imageInStorageBucket) {
+          await bucket.file(fileName).delete()
+        }
 
         await Image.delete({ uid, URL: url }).then(
           (response) => response.raw[0]
@@ -137,6 +144,37 @@ export class ImageResolver {
         }
       )
     }
+    return true
+  }
+
+  @Mutation(() => ImageResponse, { nullable: true })
+  async addImage(@Ctx() ctx: MyContext, @Arg('url') URL: string) {
+    const uid = getUserId(ctx)
+
+    let numImages = await getConnection().query(
+      `SELECT COUNT(*) FROM image WHERE uid='${uid}'`
+    )
+    console.log(numImages)
+
+    if (numImages[0].count < MAX_IMAGE_SAVED) {
+      console.log('saving image')
+      Image.create({
+        uid,
+        title: `random-image-${uuid()}`,
+        URL,
+        imageInStorageBucket: false,
+      }).save()
+    } else {
+      return {
+        errors: [
+          {
+            field: 'uploadImages',
+            message: `You have exceeded the maximum of ${MAX_IMAGE_SAVED} images saved`,
+          },
+        ],
+      }
+    }
+
     return true
   }
 }

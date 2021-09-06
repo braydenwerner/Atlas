@@ -30,6 +30,10 @@ export class Image extends BaseEntity {
   @Column({ default: false })
   isFavorite: boolean
 
+  @Field()
+  @Column({ default: true })
+  imageInStorageBucket: boolean
+
   @Field(() => String)
   @CreateDateColumn()
   createdAt: Date

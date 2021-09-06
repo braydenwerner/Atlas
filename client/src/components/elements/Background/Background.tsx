@@ -34,7 +34,6 @@ export const Background: React.FC<BackgroundProps> = React.memo(
     const videoRef = useRef() as RefObject<HTMLVideoElement> | null | undefined
 
     useEffect(() => {
-      console.log('use effect r')
       if (usingRandomWallpaper) {
         const date = new Date()
 
