@@ -1,5 +1,5 @@
 <div align="center">
-  <img align="center" width="600" height="200" src="https://i.imgur.com/fDDS8CO.png">
+  <img align="center" width="100%" height="200" src="https://i.imgur.com/fDDS8CO.png">
 </div>
 
 &nbsp;
@@ -26,29 +26,29 @@
 &nbsp;
 
 <div align="center">
-  <img align="center" width="600" height="400" src="https://i.imgur.com/dkKrTBu.png">
+  <img align="center" width="100%" height="400" src="https://i.imgur.com/dkKrTBu.png">
 </div>
 
 &nbsp;
 
 <div align="center">
-  <img align="center" width="600" height="400" src="https://i.imgur.com/LQL88fJ.png">
+  <img align="center" width="100%" height="400" src="https://i.imgur.com/LQL88fJ.png">
 </div>
 
 &nbsp;
 
 <div align="center">
-  <img align="center" width="600" height="400" src="https://i.imgur.com/6r7YElW.png">
+  <img align="center" width="100%" height="400" src="https://i.imgur.com/6r7YElW.png">
 </div>
 
 &nbsp;
 
 <div align="center">
-  <img align="center" width="600" height="400" src="https://i.imgur.com/jY8c7Lf.png">
+  <img align="center" width="100%" height="400" src="https://i.imgur.com/jY8c7Lf.png">
 </div>
 
 &nbsp;
 
 <div align="center">
-  <img align="center" width="600" height="400" src="https://i.imgur.com/XHUN3ny.png">
+  <img align="center" width="100%" height="400" src="https://i.imgur.com/XHUN3ny.png">
 </div>
