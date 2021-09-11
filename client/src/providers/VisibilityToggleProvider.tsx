@@ -31,7 +31,7 @@ export const VisibilityToggleProvider: React.FC = ({ children }) => {
     }
   )
 
-  const toggleVisibility = (component: string) => {
+  const toggleVisibility = (component: string | undefined) => {
     switch (component) {
       case 'TodoList':
         setComponentVisiblity((oldComponentVisiblity) => {

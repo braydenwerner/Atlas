@@ -29,8 +29,13 @@ export const Greeting: React.FC<GreetingProps> = ({
   setGreetingMessage,
 }) => {
   const { themeMode } = useContext(ThemeContext)
-  const { usingDigitalClock, greetingColor, setGreetingColor, containerColor } =
-    useContext(OtherSettingsContext)
+  const {
+    usingDigitalClock,
+    greetingColor,
+    setGreetingColor,
+    containerColor,
+    componentToggleState,
+  } = useContext(OtherSettingsContext)
 
   const [hoveringGreeting, setHoveringGreeting] = useState(false)
   const [updatingMessage, setUpdatingMessage] = useState(false)
@@ -94,7 +99,11 @@ export const Greeting: React.FC<GreetingProps> = ({
         >
           <Styled.TimeContainer color={greetingColor}>
             {usingDigitalClock ? (
-              <Moment format="h:mm" interval={1} />
+              componentToggleState.usingArmyTime ? (
+                <Moment format="H:mm" interval={1} />
+              ) : (
+                <Moment format="h:mm" interval={1} />
+              )
             ) : (
               <Clock
                 value={value}

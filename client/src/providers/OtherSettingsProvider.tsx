@@ -6,8 +6,11 @@ export const OtherSettingsContext = createContext({
   usingDigitalClock: true,
   greetingColor: '#FFFFFF',
   containerColor: '',
-  usingRandomWallpaper: true,
   randomWallpaperURL: '',
+  componentToggleState: {
+    usingRandomWallpaper: true,
+    usingArmyTime: false,
+  },
   setUsingDigitalClock: (usingDigitalClock: boolean) => {
     return
   },
@@ -17,10 +20,10 @@ export const OtherSettingsContext = createContext({
   setContainerColor: (color: string) => {
     return
   },
-  toggleUsingRandomWallpaper: () => {
+  setRandomWallpaperURL: (url: string) => {
     return
   },
-  setRandomWallpaperURL: (url: string) => {
+  toggle: (component: string) => {
     return
   },
 })
@@ -30,41 +33,44 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
     'usingDigitalClock',
     true
   )
-  const [greetingColor, _setGreetingColor] = useLocalStorage(
+  const [greetingColor, setGreetingColor] = useLocalStorage(
     'greetingColor',
     '#FFFFFF'
   )
-  const [containerColor, _setContainerColor] = useLocalStorage(
+  const [containerColor, setContainerColor] = useLocalStorage(
     'containerColor',
     ''
   )
-  const [usingRandomWallpaper, setUsingRandomWallpaper] = useLocalStorage(
-    'randomWallpaper',
-    true
-  )
-  const [randomWallpaperURL, _setRandomWallpaperURL] = useLocalStorage(
+  const [randomWallpaperURL, setRandomWallpaperURL] = useLocalStorage(
     'randomWallpaperURL',
     ''
   )
+  const [componentToggleState, setComponentToggleState] = useLocalStorage(
+    'componentToggleState',
+    {
+      usingRandomWallpaper: true,
+      usingArmyTime: false,
+    }
+  )
 
-  //  passing the setState directly into the memo gives error:
-  //  Cannot update a component (`OtherSettingsProvider`) while rendering a different component
-  const setGreetingColor = (color: string) => {
-    _setGreetingColor(color)
-  }
+  const toggle = (component: string) => {
+    switch (component) {
+      case 'RandomWallpaper':
+        setComponentToggleState((oldComponentToggleState) => {
+          const usingRandomWallpaper =
+            !oldComponentToggleState.usingRandomWallpaper
 
-  const setContainerColor = (color: string) => {
-    _setContainerColor(color)
-  }
+          return { ...oldComponentToggleState, usingRandomWallpaper }
+        })
+        break
+      case 'ArmyTime':
+        setComponentToggleState((oldComponentToggleState) => {
+          const usingArmyTime = !oldComponentToggleState.usingArmyTime
 
-  const setRandomWallpaperURL = (url: string) => {
-    _setRandomWallpaperURL(url)
-  }
-
-  const toggleUsingRandomWallpaper = () => {
-    setUsingRandomWallpaper(
-      (oldUsingRandomWallpaper) => !oldUsingRandomWallpaper
-    )
+          return { ...oldComponentToggleState, usingArmyTime }
+        })
+        break
+    }
   }
 
   const settingsValue = useMemo(
@@ -72,20 +78,21 @@ export const OtherSettingsProvider: React.FC = ({ children }) => {
       usingDigitalClock,
       greetingColor,
       containerColor,
-      usingRandomWallpaper,
       randomWallpaperURL,
+      componentToggleState,
       setUsingDigitalClock,
       setGreetingColor,
       setContainerColor,
-      toggleUsingRandomWallpaper,
       setRandomWallpaperURL,
+      toggle,
     }),
     [
       usingDigitalClock,
       greetingColor,
       containerColor,
-      usingRandomWallpaper,
       randomWallpaperURL,
+      componentToggleState,
+      toggle,
     ]
   )
   return (

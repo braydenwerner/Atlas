@@ -24,8 +24,7 @@ const UserUploadedImage: React.FC<SelectableImageProps> = ({
   setSelectedBackground,
   setSelectedImages,
 }) => {
-  const { usingRandomWallpaper, toggleUsingRandomWallpaper } =
-    useContext(OtherSettingsContext)
+  const { componentToggleState, toggle } = useContext(OtherSettingsContext)
 
   const [imageLoading, setImageLoading] = useState(true)
 
@@ -51,7 +50,8 @@ const UserUploadedImage: React.FC<SelectableImageProps> = ({
                 setSelectedBackground(image.URL)
 
                 // allow the user to use the image they clicked on, override random wallpapers
-                if (usingRandomWallpaper) toggleUsingRandomWallpaper()
+                if (componentToggleState.usingRandomWallpaper)
+                  toggle('RandomWallpaper')
 
                 //  set the background in the database
                 updateUser({

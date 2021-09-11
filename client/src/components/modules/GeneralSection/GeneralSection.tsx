@@ -48,31 +48,46 @@ export const GeneralSection: React.FC = () => {
         <Styled.CustomizationRow disableBorderTop={true}>
           <Styled.CustomizationLabel>Todos</Styled.CustomizationLabel>
           <Styled.SubOptionContainer>
-            <ToggleSwitch component="showingTodoList" />
+            <ToggleSwitch
+              visiblityComponent="showingTodoList"
+              isVisibilityToggle={true}
+            />
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow>
         <Styled.CustomizationRow>
           <Styled.CustomizationLabel>Greeting</Styled.CustomizationLabel>
           <Styled.SubOptionContainer>
-            <ToggleSwitch component="showingGreeting" />
+            <ToggleSwitch
+              visiblityComponent="showingGreeting"
+              isVisibilityToggle={true}
+            />
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow>
         <Styled.CustomizationRow>
           <Styled.CustomizationLabel>Notes</Styled.CustomizationLabel>
           <Styled.SubOptionContainer>
-            <ToggleSwitch component="showingNotes" />
+            <ToggleSwitch
+              visiblityComponent="showingNotes"
+              isVisibilityToggle={true}
+            />
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow>
         <Styled.CustomizationRow>
           <Styled.CustomizationLabel>Drawings</Styled.CustomizationLabel>
           <Styled.SubOptionContainer>
-            <ToggleSwitch component="showingDrawings" />
+            <ToggleSwitch
+              visiblityComponent="showingDrawings"
+              isVisibilityToggle={true}
+            />
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow>
         <Styled.CustomizationRow>
           <Styled.CustomizationLabel>Weather</Styled.CustomizationLabel>
           <Styled.SubOptionContainer>
-            <ToggleSwitch component="showingWeatherWidget" />
+            <ToggleSwitch
+              visiblityComponent="showingWeatherWidget"
+              isVisibilityToggle={true}
+            />
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow>
         {/* <Styled.CustomizationRow>
@@ -142,7 +157,7 @@ export const GeneralSection: React.FC = () => {
           </Styled.CustomizationRow>
           <Styled.ThemeColorSliderContainer>
             {showCustomThemeSelection && (
-              <Styled.ThemeSelectionWrapper>
+              <Styled.SelectionWrapper>
                 <Styled.SliderPickerContainer>
                   <SliderPicker
                     color={_containerColor}
@@ -164,7 +179,7 @@ export const GeneralSection: React.FC = () => {
                     </>
                   )}
                 </Styled.SliderInfoContainer>
-              </Styled.ThemeSelectionWrapper>
+              </Styled.SelectionWrapper>
             )}
           </Styled.ThemeColorSliderContainer>
         </Styled.CustomizationColumn>
@@ -186,6 +201,21 @@ export const GeneralSection: React.FC = () => {
             </Styled.SubOption>
           </Styled.SubOptionContainer>
         </Styled.CustomizationRow>
+        {usingDigitalClock && (
+          <Styled.SelectionWrapper>
+            <Styled.CustomizationRow>
+              <Styled.CustomizationLabel style={{ marginLeft: '12px' }}>
+                24-Hour Clock
+              </Styled.CustomizationLabel>
+              <Styled.SubOptionContainer>
+                <ToggleSwitch
+                  otherSettingsComponent="usingArmyTime"
+                  isVisibilityToggle={false}
+                />
+              </Styled.SubOptionContainer>
+            </Styled.CustomizationRow>
+          </Styled.SelectionWrapper>
+        )}
         <Styled.CustomizationRow>
           <Styled.CustomizationLabel style={{ marginTop: '20px' }}>
             Greeting Color

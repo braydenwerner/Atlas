@@ -36,7 +36,7 @@ export const ImageSection: React.FC<ImageSectionProps> = ({
   selectedBackground,
   setSelectedBackground,
 }) => {
-  const { usingRandomWallpaper, randomWallpaperURL } =
+  const { componentToggleState, randomWallpaperURL } =
     useContext(OtherSettingsContext)
 
   const [hasScrolled, setHasScrolled] = useState(false)
@@ -62,9 +62,12 @@ export const ImageSection: React.FC<ImageSectionProps> = ({
         <Styled.ImagesHeader>Images</Styled.ImagesHeader>
         <Styled.RandomImageContainer>
           <Styled.ImagesSubHeader>Enable Random Images</Styled.ImagesSubHeader>
-          <ToggleSwitch component={'usingRandomWallpaper'} />
+          <ToggleSwitch
+            otherSettingsComponent="usingRandomWallpaper"
+            isVisibilityToggle={false}
+          />
         </Styled.RandomImageContainer>
-        {usingRandomWallpaper && randomWallpaperURL && (
+        {componentToggleState.usingRandomWallpaper && randomWallpaperURL && (
           <Styled.SaveWallpaperContainer
             onClick={async () => {
               const response: any = await addImage({

@@ -9,34 +9,43 @@ import {
 } from '../../../providers/index'
 
 interface ToggleVisibilitySwitchProps {
-  component: keyof {
+  visiblityComponent?: keyof {
     showingTodoList: boolean
     showingGreeting: boolean
     showingNotes: boolean
     showingWeatherWidget: boolean
     showingSearchbar: boolean
     showingDrawings: boolean
-    usingRandomWallpaper: boolean
     showingStocksWidget: boolean
   }
+  otherSettingsComponent?: keyof {
+    usingRandomWallpaper: boolean
+    usingArmyTime: boolean
+  }
+  isVisibilityToggle: boolean
 }
 
 export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
-  component,
+  visiblityComponent,
+  otherSettingsComponent,
+  isVisibilityToggle,
 }) => {
   const { themeMode } = useContext(ThemeContext)
   const { componentVisiblity, toggleVisibility } = useContext(
     VisiblityToggleContext
   )
-  const { usingRandomWallpaper, toggleUsingRandomWallpaper } =
-    useContext(OtherSettingsContext)
+  const { componentToggleState, toggle } = useContext(OtherSettingsContext)
 
   return (
     <Switch
       checked={
-        component !== 'usingRandomWallpaper'
-          ? componentVisiblity[component]
-          : usingRandomWallpaper
+        isVisibilityToggle
+          ? visiblityComponent
+            ? componentVisiblity[visiblityComponent]
+            : false
+          : otherSettingsComponent
+          ? componentToggleState[otherSettingsComponent]
+          : false
       }
       height={25}
       width={60}
@@ -73,23 +82,26 @@ export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
         />
       }
       onChange={() => {
-        if (component === 'showingGreeting') toggleVisibility('Greeting')
-        else if (component === 'showingTodoList') {
+        if (visiblityComponent === 'showingGreeting')
+          toggleVisibility('Greeting')
+        else if (visiblityComponent === 'showingTodoList') {
           //  when user re-opens, should no longer be minimized
           localStorage.removeItem('minimizeTodo')
           toggleVisibility('TodoList')
-        } else if (component === 'showingNotes') {
+        } else if (visiblityComponent === 'showingNotes') {
           toggleVisibility('Notes')
-        } else if (component === 'showingWeatherWidget') {
+        } else if (visiblityComponent === 'showingWeatherWidget') {
           toggleVisibility('WeatherWidget')
-        } else if (component === 'showingSearchbar') {
+        } else if (visiblityComponent === 'showingSearchbar') {
           toggleVisibility('SearchBar')
-        } else if (component === 'showingDrawings') {
+        } else if (visiblityComponent === 'showingDrawings') {
           toggleVisibility('Drawings')
-        } else if (component === 'showingStocksWidget') {
+        } else if (visiblityComponent === 'showingStocksWidget') {
           toggleVisibility('StocksWidget')
-        } else if (component === 'usingRandomWallpaper') {
-          toggleUsingRandomWallpaper()
+        } else if (otherSettingsComponent === 'usingRandomWallpaper') {
+          toggle('RandomWallpaper')
+        } else if (otherSettingsComponent === 'usingArmyTime') {
+          toggle('ArmyTime')
         }
       }}
     />

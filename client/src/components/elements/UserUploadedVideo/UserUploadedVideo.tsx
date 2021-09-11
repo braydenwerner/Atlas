@@ -24,8 +24,7 @@ const UserUploadedVideo: React.FC<SelectableVideoProps> = ({
   setSelectedBackground,
   setSelectedVideos,
 }) => {
-  const { usingRandomWallpaper, toggleUsingRandomWallpaper } =
-    useContext(OtherSettingsContext)
+  const { componentToggleState, toggle } = useContext(OtherSettingsContext)
 
   const [videoLoading, setVideoLoading] = useState(true)
 
@@ -47,7 +46,8 @@ const UserUploadedVideo: React.FC<SelectableVideoProps> = ({
                 setSelectedBackground(video.URL)
 
                 // allow the user to use the video they clicked on, override random wallpapers
-                if (usingRandomWallpaper) toggleUsingRandomWallpaper()
+                if (componentToggleState.usingRandomWallpaper)
+                  toggle('RandomWallpaper')
 
                 //  set the background in the database
                 updateUser({

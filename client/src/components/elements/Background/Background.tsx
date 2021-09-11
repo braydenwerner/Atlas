@@ -19,7 +19,7 @@ interface BackgroundProps {
 
 export const Background: React.FC<BackgroundProps> = React.memo(
   ({ selectedBackground }) => {
-    const { usingRandomWallpaper, randomWallpaperURL, setRandomWallpaperURL } =
+    const { componentToggleState, randomWallpaperURL, setRandomWallpaperURL } =
       useContext(OtherSettingsContext)
 
     const [lastFetched, setLastFetched] = useLocalStorage(
@@ -34,7 +34,7 @@ export const Background: React.FC<BackgroundProps> = React.memo(
     const videoRef = useRef() as RefObject<HTMLVideoElement> | null | undefined
 
     useEffect(() => {
-      if (usingRandomWallpaper) {
+      if (componentToggleState.usingRandomWallpaper) {
         const date = new Date()
 
         //  if the random wallpaper does not exist, or a day has passed
@@ -51,7 +51,7 @@ export const Background: React.FC<BackgroundProps> = React.memo(
           setRandomWallpaper(randomWallpaperURL)
         }
       }
-    }, [usingRandomWallpaper])
+    }, [componentToggleState.usingRandomWallpaper])
 
     const fetchWallpaper = async () => {
       setFetching(true)
@@ -81,7 +81,11 @@ export const Background: React.FC<BackgroundProps> = React.memo(
       }
     }, [selectedBackground])
 
-    if (randomWallpaper && usingRandomWallpaper && !errors) {
+    if (
+      randomWallpaper &&
+      componentToggleState.usingRandomWallpaper &&
+      !errors
+    ) {
       return <Styled.BackgroundImage image={randomWallpaper} />
     } else {
       if (selectedBackground && selectedBackground.endsWith('mp4')) {

@@ -91,7 +91,7 @@ export const CustomizationButton = styled.div`
   }
 `
 
-const ThemeSelectionWrapperAnimationIn = keyframes`
+const SelectionWrapperAnimationIn = keyframes`
 0% {
   height: 5px;
   opacity: 0;
@@ -102,9 +102,9 @@ const ThemeSelectionWrapperAnimationIn = keyframes`
 }
 `
 
-export const ThemeSelectionWrapper = styled.div`
+export const SelectionWrapper = styled.div`
   display: flex;
-  animation: ${ThemeSelectionWrapperAnimationIn} 0.1s linear;
+  animation: ${SelectionWrapperAnimationIn} 0.1s linear;
   animation-fill-mode: forwards;
   width: 100%;
 `
