@@ -87,5 +87,6 @@ export const ErrorMessageContainer = styled.div`
 export const ErrorMessage = styled.div`
   positon: relative;
   color: white;
+  font-size: 1rem;
   margin-bottom: 10px;
 `
