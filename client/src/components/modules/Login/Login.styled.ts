@@ -76,7 +76,6 @@ export const ErrorMessageContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  margin-top: 40px;
   justify-content: center;
   left: 0;
   width: 100%;
@@ -87,6 +86,6 @@ export const ErrorMessageContainer = styled.div`
 
 export const ErrorMessage = styled.div`
   positon: relative;
-  color: black;
+  color: white;
   margin-bottom: 10px;
 `
