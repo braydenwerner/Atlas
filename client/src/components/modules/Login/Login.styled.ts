@@ -17,6 +17,7 @@ export const LoginPromptContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 160px;
 `
 
 export const StepHeader = styled.div`
@@ -56,7 +57,7 @@ export const ForgotPasswordButton = styled.div`
   position: relative;
   top: 5px;
   left: 135px;
-  color: black;
+  color: white;
   font-size: 1rem;
   cursor: pointer;
 
