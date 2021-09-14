@@ -10,7 +10,7 @@ export const Donate: React.FC<DonateProps> = ({ setShowingDonate }) => {
   return (
     <>
       <Styled.DonateContainer>
-        <Styled.DonateHeader>Support Innodesk</Styled.DonateHeader>
+        <Styled.DonateHeader>Support Atlas</Styled.DonateHeader>
         <Styled.DonateDescription>
           Thank you for thinking about supporting this project!
           <br />

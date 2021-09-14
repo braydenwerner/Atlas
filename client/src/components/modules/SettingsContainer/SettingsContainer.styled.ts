@@ -80,3 +80,9 @@ export const SettingsDisplayColumn = styled.div<ContainerColorProps>`
   background-color: ${(props) => props.theme.primaryContainer};
   background-color: ${(props) => props.containerColor};
 `
+
+export const FeedbackLink = styled.a`
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: ${(props) => props.theme.secondaryText};
+`

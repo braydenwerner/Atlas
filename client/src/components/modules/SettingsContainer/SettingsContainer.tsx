@@ -73,6 +73,15 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
             </Styled.SettingsSelectorItem> */}
           </div>
           <Styled.BottomSelectorContainer>
+            <Styled.SettingsSelectorItem>
+              <Styled.FeedbackLink
+                href="https://docs.google.com/forms/d/17C8gtHkEb4NTWNB4DezZx2Zg3hcaI81XXOD1OAYG4TM/edit"
+                target="_blank"
+                aria-label="feedback-link"
+              >
+                Give Feedback
+              </Styled.FeedbackLink>
+            </Styled.SettingsSelectorItem>
             <Styled.SettingsSelectorItem onClick={() => setShowingDonate(true)}>
               Donate
             </Styled.SettingsSelectorItem>
