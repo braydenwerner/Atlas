@@ -1,8 +1,10 @@
 import { useContext, useState, Dispatch, SetStateAction } from 'react'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 
 import { auth } from '../../../config/firebaseConfig'
 import { OtherSettingsContext } from '../../../providers'
-import { Donate } from '../../elements'
+import { Donate, StripePayment } from '../../elements'
 import { ImageSection, GeneralSection, ShortcutSection } from '../index'
 import { VideoSection } from '../VideoSection/VideoSection'
 import * as Styled from './SettingsContainer.styled'
@@ -12,16 +14,21 @@ interface SettingsContainerProps {
   setSelectedBackground: Dispatch<SetStateAction<string | undefined>>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE!)
+
 export const SettingsContainer: React.FC<SettingsContainerProps> = ({
   selectedBackground,
   setSelectedBackground,
 }) => {
   const { containerColor } = useContext(OtherSettingsContext)
+
   const [selectedSettingsOption, setSelectedSettingsOption] =
     useState('general')
   const [selectedImageOption, setSelectedImageOption] = useState('My Images')
   const [selectedVideoOption, setSelectedVideoOption] = useState('My Videos')
   const [showingDonate, setShowingDonate] = useState(false)
+  const [showingPayment, setShowingPayment] = useState(false)
 
   const signOut = async () => {
     localStorage.removeItem('greetingMessage')
@@ -73,6 +80,11 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
             </Styled.SettingsSelectorItem> */}
           </div>
           <Styled.BottomSelectorContainer>
+            <Styled.SettingsSelectorItem
+              onClick={() => setShowingPayment(true)}
+            >
+              Get Atlas Plus
+            </Styled.SettingsSelectorItem>
             <Styled.SettingsSelectorItem>
               <Styled.FeedbackLink
                 href="https://docs.google.com/forms/d/17C8gtHkEb4NTWNB4DezZx2Zg3hcaI81XXOD1OAYG4TM/edit"
@@ -112,6 +124,12 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
         </Styled.SettingsDisplayColumn>
       </Styled.SettingsWrapper>
       {showingDonate && <Donate setShowingDonate={setShowingDonate} />}
+      {showingPayment && (
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        <Elements stripe={stripePromise}>
+          <StripePayment setShowingPayment={setShowingPayment} />
+        </Elements>
+      )}
     </>
   )
 }

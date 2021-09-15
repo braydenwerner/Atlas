@@ -2,13 +2,13 @@
   "short_name": "Atlas",
   "name": "Atlas",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAthywZt/V9jvqpFWhatQqcMBY/mSsxKj6rhxV81quJH+UZ+3y4sbrsZxmL60bBAzrc+TgUAzj0EYIscHb2CRGLtiaek9vYqWZKE/SMGmblRwq/kRQfAuRHfN/G4ufGZNbtMRyjlloB6G4oUkw7/1JAxk1Uv037cW1OQjVE7RyK248YM9oTIFAkKrfw6VKVbyZbgdn3qEstWhCdqu6WCxuiGP87V+sPjU/m9yVKl35jTlqZHCNZuhMdeVW7M5jhxopo2AkN8fCeDasdvlRdU6fQ9r6GyR3MHMKWNqRMIHwizOQXMyrlKUm02e+hC1wLxTwb1RM/L23+bgHyQuPC9ZstwIDAQAB",
-  "description": "A comprehensive tool for drawing, taking notes, and staying organized all on your chrome homepage.",
+  "description": "A comprehensive tool for drawing, taking notes, and much more all on your chrome homepage.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
   "version": "0.0.1",
   "manifest_version": 2,
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://stripe.com/ https://js.stripe.com/ https://checkout.stripe.com/; object-src 'self'",
   "browser_action": {
     "default_icon": {
       "16": "./images/atlas-16.png",

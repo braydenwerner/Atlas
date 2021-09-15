@@ -45,6 +45,7 @@ export class UserResolver {
     } catch (err) {
       return { errors: [{ field: 'createUser', message: err }] }
     }
+
     return { user, token: createToken(data.uid) }
   }
 
@@ -72,32 +73,32 @@ export class UserResolver {
     return true
   }
 
-  @Mutation(() => UserAccount)
-  async makePayment(@Ctx() ctx: MyContext) {
-    const uid = getUserId(ctx)
+  // @Mutation(() => UserResponse)
+  // async subscribe(@Ctx() ctx: MyContext) {
+  //   const uid = getUserId(ctx)
 
-    const user = await UserAccount.findOne({ uid })
+  //   const user = await UserAccount.findOne({ uid })
 
-    if (!user) {
-      return {
-        errors: [{ field: 'makePayment', message: 'Could not find user' }],
-      }
-    }
+  //   if (!user) {
+  //     return {
+  //       errors: [{ field: 'subscribe', message: 'Could not find user' }],
+  //     }
+  //   }
 
-    const customer = await stripe.customers.create({
-      email: user.email,
-      source,
-      plan: process.env.StripePlane,
-    })
+  //   const customer = await stripe.customers.create({
+  //     email: user.email,
+  //     source,
+  //     plan: process.env.StripePlan,
+  //   })
 
-    await UserAccount.update(
-      { uid },
-      {
-        stripeId: customer.id,
-        paymentType: 'paid',
-      }
-    )
+  //   await UserAccount.update(
+  //     { uid },
+  //     {
+  //       stripeId: customer.id,
+  //       paymentType: 'paid',
+  //     }
+  //   )
 
-    return user
-  }
+  //   return user
+  // }
 }
