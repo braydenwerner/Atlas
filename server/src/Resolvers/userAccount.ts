@@ -71,4 +71,33 @@ export class UserResolver {
     )
     return true
   }
+
+  @Mutation(() => UserAccount)
+  async makePayment(@Ctx() ctx: MyContext) {
+    const uid = getUserId(ctx)
+
+    const user = await UserAccount.findOne({ uid })
+
+    if (!user) {
+      return {
+        errors: [{ field: 'makePayment', message: 'Could not find user' }],
+      }
+    }
+
+    const customer = await stripe.customers.create({
+      email: user.email,
+      source,
+      plan: process.env.StripePlane,
+    })
+
+    await UserAccount.update(
+      { uid },
+      {
+        stripeId: customer.id,
+        paymentType: 'paid',
+      }
+    )
+
+    return user
+  }
 }

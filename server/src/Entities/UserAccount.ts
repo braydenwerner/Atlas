@@ -53,6 +53,14 @@ export class UserAccount extends BaseEntity {
   // @OneToMany(() => Todos, (todo) => todo.id)
   // todos: Todos[]
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  stripeId: string
+
+  @Field({ defaultValue: 'unpaid' })
+  @Column({ default: 'unpaid' })
+  paymentType: string
+
   @Field(() => String, { nullable: true })
   @CreateDateColumn()
   lastLoggedIn: Date

@@ -231,7 +231,7 @@ export const Login: React.FC = () => {
                 )}
                 {loginStep === 'EnterPassword' && (
                   <>
-                    <Styled.StepHeader>Enter your password</Styled.StepHeader>
+                    <Styled.StepHeader>Enter a password</Styled.StepHeader>
                     <Field
                       name="password"
                       type={'password'}
