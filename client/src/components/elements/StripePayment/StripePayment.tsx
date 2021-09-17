@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react'
-// import StripeCheckout from 'react-stripe-checkout'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
 import {
@@ -17,7 +15,7 @@ interface StripePaymentProps {
 export const StripePayment: React.FC<StripePaymentProps> = ({
   setShowingPayment,
 }) => {
-  const [error, setError] = useState()
+  const [error, setError] = useState<string | undefined | null>()
 
   const stripe = useStripe()
   const elements = useElements()
@@ -36,17 +34,18 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
       card: elements.getElement(CardElement)!,
     })
 
-    console.log('payment method: ', paymentMethod)
     if (error) {
-      console.error(error)
-    } else {
-      //  send information to backend
-      if (paymentMethod) {
-        const response = await subscribe({
-          variables: { paymentId: paymentMethod.id },
-          refetchQueries: [{ query: GetUserDocument }],
-        })
-        console.log(response)
+      setError(error.message)
+      return
+    }
+
+    if (paymentMethod) {
+      const response = await subscribe({
+        variables: { paymentId: paymentMethod.id },
+        refetchQueries: [{ query: GetUserDocument }],
+      })
+      if (response.data && response.data.subscribe.errors) {
+        setError(response.data.subscribe.errors[0].message)
       }
     }
   }
@@ -63,6 +62,7 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
         <button type="submit" disabled={!stripe || !elements}>
           Pay
         </button>
+        <div>{error}</div>
       </form>
     </Styled.PaymentContainer>
   )

@@ -69,7 +69,6 @@ export const Notes: React.FC = () => {
       setFilteredNotes(
         notes.filter((notesObj) => {
           return (
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             JSON.parse(notesObj.body!)
               ?.blocks[0]?.text.toLowerCase()
               .indexOf(val.toLocaleLowerCase()) >= 0

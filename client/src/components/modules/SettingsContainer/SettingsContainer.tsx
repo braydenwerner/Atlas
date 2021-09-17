@@ -8,14 +8,18 @@ import { Donate, StripePayment } from '../../elements'
 import { ImageSection, GeneralSection, ShortcutSection } from '../index'
 import { VideoSection } from '../VideoSection/VideoSection'
 import * as Styled from './SettingsContainer.styled'
+import { dev } from '../../../config/config'
 
 interface SettingsContainerProps {
   selectedBackground: string | undefined
   setSelectedBackground: Dispatch<SetStateAction<string | undefined>>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE!)
+const stripePromise = loadStripe(
+  dev
+    ? process.env.REACT_APP_STRIPE_PUBLISHABLE_TEST!
+    : process.env.REACT_APP_STRIPE_PUBLISHABLE_PROD!
+)
 
 export const SettingsContainer: React.FC<SettingsContainerProps> = ({
   selectedBackground,
@@ -125,7 +129,6 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
       </Styled.SettingsWrapper>
       {showingDonate && <Donate setShowingDonate={setShowingDonate} />}
       {showingPayment && (
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         <Elements stripe={stripePromise}>
           <StripePayment setShowingPayment={setShowingPayment} />
         </Elements>

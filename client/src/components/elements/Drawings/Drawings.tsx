@@ -83,7 +83,6 @@ export const Drawings: React.FC = () => {
       canvasRef.current.resetCanvas()
       if (drawingsData[updatedDrawingsIndex]?.imageData) {
         const imagesData = JSON.parse(
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           drawingsData[updatedDrawingsIndex].imageData!
         )
         if (canvasRef && canvasRef.current) {
