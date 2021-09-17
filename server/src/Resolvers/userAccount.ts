@@ -13,7 +13,7 @@ import { UserAccount } from '../Entities/index'
 import { UpdateUserInput } from './UpdateUserInput'
 import { MyContext } from '../types'
 import { CreateUserInput } from './CreateUserInput'
-import { createToken, getUserId } from '../utils'
+import { createToken, getUserId, stripe } from '../utils'
 
 @ObjectType()
 class UserResponse {
@@ -73,32 +73,41 @@ export class UserResolver {
     return true
   }
 
-  // @Mutation(() => UserResponse)
-  // async subscribe(@Ctx() ctx: MyContext) {
-  //   const uid = getUserId(ctx)
+  @Mutation(() => UserResponse)
+  async subscribe(@Arg('paymentId') paymentId: string, @Ctx() ctx: MyContext) {
+    const uid = getUserId(ctx)
 
-  //   const user = await UserAccount.findOne({ uid })
+    const user = await UserAccount.findOne({ uid })
 
-  //   if (!user) {
-  //     return {
-  //       errors: [{ field: 'subscribe', message: 'Could not find user' }],
-  //     }
-  //   }
+    if (!user) {
+      return {
+        errors: [{ field: 'subscribe', message: 'Could not find user' }],
+      }
+    }
 
-  //   const customer = await stripe.customers.create({
-  //     email: user.email,
-  //     source,
-  //     plan: process.env.StripePlan,
-  //   })
+    const customer = await stripe.customers.create({
+      payment_method: paymentId,
+      email: user.email,
+      invoice_settings: {
+        default_payment_method: paymentId,
+      },
+      //plan: process.env.StripePlan,
+    })
 
-  //   await UserAccount.update(
-  //     { uid },
-  //     {
-  //       stripeId: customer.id,
-  //       paymentType: 'paid',
-  //     }
-  //   )
+    await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ plan: process.env.STRIPE_PLAN }],
+      expand: ['latest_invoice.payment_intent'],
+    })
 
-  //   return user
-  // }
+    await UserAccount.update(
+      { uid },
+      {
+        stripeId: customer.id,
+        paymentType: 'paid',
+      }
+    )
+
+    return user
+  }
 }
