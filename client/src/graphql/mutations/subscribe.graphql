@@ -1,0 +1,12 @@
+mutation subscribe($paymentId: String!) {
+  subscribe(paymentId: $paymentId) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      email
+    }
+  }
+}

@@ -85,29 +85,47 @@ export class UserResolver {
       }
     }
 
-    const customer = await stripe.customers.create({
-      payment_method: paymentId,
-      email: user.email,
-      invoice_settings: {
-        default_payment_method: paymentId,
-      },
-      //plan: process.env.StripePlan,
-    })
-
-    await stripe.subscriptions.create({
-      customer: customer.id,
-      items: [{ plan: process.env.STRIPE_PLAN }],
-      expand: ['latest_invoice.payment_intent'],
-    })
-
-    await UserAccount.update(
-      { uid },
-      {
-        stripeId: customer.id,
-        paymentType: 'paid',
+    if (user.paymentType === 'paid') {
+      return {
+        errors: [
+          {
+            field: 'subscribe',
+            message: 'The user has already paid for this subscription',
+          },
+        ],
       }
-    )
+    }
 
-    return user
+    try {
+      const customer = await stripe.customers.create({
+        payment_method: paymentId,
+        email: user.email,
+        description: 'Purchased Atlas Premium',
+        invoice_settings: {
+          default_payment_method: paymentId,
+        },
+      })
+
+      await stripe.subscriptions.create({
+        customer: customer.id,
+        items: [{ plan: process.env.STRIPE_PRICE_TEST }],
+        expand: ['latest_invoice.payment_intent'],
+      })
+
+      await UserAccount.update(
+        { uid },
+        {
+          stripeId: customer.id,
+          paymentType: 'paid',
+        }
+      )
+    } catch (e) {
+      console.error(e)
+      return {
+        errors: [{ field: 'subscribe', message: e }],
+      }
+    }
+
+    return { user }
   }
 }

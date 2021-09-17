@@ -53,6 +53,7 @@ export type Image = {
   title: Scalars['String'];
   URL: Scalars['String'];
   isFavorite: Scalars['Boolean'];
+  imageInStorageBucket: Scalars['Boolean'];
   createdAt: Scalars['String'];
 };
 
@@ -71,6 +72,7 @@ export type Mutation = {
   createUser: UserResponse;
   login: UserResponse;
   updateUser: Scalars['Boolean'];
+  subscribe: UserResponse;
   createTodo: Todo;
   updateTodo: Scalars['Boolean'];
   deleteTodo: Scalars['Boolean'];
@@ -119,6 +121,11 @@ export type MutationLoginArgs = {
 
 export type MutationUpdateUserArgs = {
   data: UpdateUserInput;
+};
+
+
+export type MutationSubscribeArgs = {
+  paymentId: Scalars['String'];
 };
 
 
@@ -244,6 +251,8 @@ export type UserAccount = {
   selectedUserBackground?: Maybe<Scalars['String']>;
   colorTheme?: Maybe<Scalars['String']>;
   greetingMessage?: Maybe<Scalars['String']>;
+  stripeId?: Maybe<Scalars['String']>;
+  paymentType?: Maybe<Scalars['String']>;
   lastLoggedIn?: Maybe<Scalars['String']>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
@@ -419,6 +428,25 @@ export type LoginMutation = (
   ) }
 );
 
+export type SubscribeMutationVariables = Exact<{
+  paymentId: Scalars['String'];
+}>;
+
+
+export type SubscribeMutation = (
+  { __typename?: 'Mutation' }
+  & { subscribe: (
+    { __typename?: 'UserResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, user?: Maybe<(
+      { __typename?: 'UserAccount' }
+      & Pick<UserAccount, 'id' | 'email'>
+    )> }
+  ) }
+);
+
 export type UpdateDrawingMutationVariables = Exact<{
   id: Scalars['Int'];
   data: UpdateDrawingInput;
@@ -567,7 +595,7 @@ export type GetUserQuery = (
   { __typename?: 'Query' }
   & { getUser?: Maybe<(
     { __typename?: 'UserAccount' }
-    & Pick<UserAccount, 'name' | 'email' | 'country' | 'photoURL' | 'selectedUserBackground' | 'colorTheme' | 'greetingMessage'>
+    & Pick<UserAccount, 'name' | 'email' | 'country' | 'photoURL' | 'selectedUserBackground' | 'colorTheme' | 'greetingMessage' | 'paymentType'>
   )> }
 );
 
@@ -962,6 +990,46 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const SubscribeDocument = gql`
+    mutation subscribe($paymentId: String!) {
+  subscribe(paymentId: $paymentId) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      email
+    }
+  }
+}
+    `;
+export type SubscribeMutationFn = Apollo.MutationFunction<SubscribeMutation, SubscribeMutationVariables>;
+
+/**
+ * __useSubscribeMutation__
+ *
+ * To run a mutation, you first call `useSubscribeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubscribeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [subscribeMutation, { data, loading, error }] = useSubscribeMutation({
+ *   variables: {
+ *      paymentId: // value for 'paymentId'
+ *   },
+ * });
+ */
+export function useSubscribeMutation(baseOptions?: Apollo.MutationHookOptions<SubscribeMutation, SubscribeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SubscribeMutation, SubscribeMutationVariables>(SubscribeDocument, options);
+      }
+export type SubscribeMutationHookResult = ReturnType<typeof useSubscribeMutation>;
+export type SubscribeMutationResult = Apollo.MutationResult<SubscribeMutation>;
+export type SubscribeMutationOptions = Apollo.BaseMutationOptions<SubscribeMutation, SubscribeMutationVariables>;
 export const UpdateDrawingDocument = gql`
     mutation updateDrawing($id: Int!, $data: UpdateDrawingInput!) {
   updateDrawing(id: $id, data: $data)
@@ -1385,6 +1453,7 @@ export const GetUserDocument = gql`
     selectedUserBackground
     colorTheme
     greetingMessage
+    paymentType
   }
 }
     `;

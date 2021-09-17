@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 import 'reflect-metadata'
 import express from 'express'
 import path from 'path'
@@ -21,8 +23,6 @@ import {
 import { NoteResolver } from './Resolvers/note'
 import { VideoResolver } from './Resolvers/video'
 import { DrawingResolver } from './Resolvers/drawing'
-
-require('dotenv').config()
 
 //  get storage credentials from .env instead of json file
 const keysEnvVar = process.env['STORAGE_CREDS']

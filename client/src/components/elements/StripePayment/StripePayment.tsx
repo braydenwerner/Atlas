@@ -1,8 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Dispatch, SetStateAction, SyntheticEvent } from 'react'
+import { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react'
 // import StripeCheckout from 'react-stripe-checkout'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
+import {
+  GetUserDocument,
+  useSubscribeMutation,
+} from '../../../generated/graphql'
 import * as Styled from './StripePayment.styled'
 import './StripePayment.css'
 
@@ -13,8 +17,12 @@ interface StripePaymentProps {
 export const StripePayment: React.FC<StripePaymentProps> = ({
   setShowingPayment,
 }) => {
+  const [error, setError] = useState()
+
   const stripe = useStripe()
   const elements = useElements()
+
+  const [subscribe] = useSubscribeMutation()
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault()
@@ -30,7 +38,16 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
 
     console.log('payment method: ', paymentMethod)
     if (error) {
-      console.log(error)
+      console.error(error)
+    } else {
+      //  send information to backend
+      if (paymentMethod) {
+        const response = await subscribe({
+          variables: { paymentId: paymentMethod.id },
+          refetchQueries: [{ query: GetUserDocument }],
+        })
+        console.log(response)
+      }
     }
   }
 
