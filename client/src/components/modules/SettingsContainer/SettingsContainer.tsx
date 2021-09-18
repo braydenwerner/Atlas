@@ -3,12 +3,12 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
 import { auth } from '../../../config/firebaseConfig'
-import { OtherSettingsContext } from '../../../providers'
+import { OtherSettingsContext, SignedInContext } from '../../../providers'
 import { Donate, StripePayment } from '../../elements'
 import { ImageSection, GeneralSection, ShortcutSection } from '../index'
 import { VideoSection } from '../VideoSection/VideoSection'
-import * as Styled from './SettingsContainer.styled'
 import { dev } from '../../../config/config'
+import * as Styled from './SettingsContainer.styled'
 
 interface SettingsContainerProps {
   selectedBackground: string | undefined
@@ -26,6 +26,7 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
   setSelectedBackground,
 }) => {
   const { containerColor } = useContext(OtherSettingsContext)
+  const { hasPaid } = useContext(SignedInContext)
 
   const [selectedSettingsOption, setSelectedSettingsOption] =
     useState('general')
@@ -72,9 +73,15 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
             </Styled.SettingsSelectorItem>
             <Styled.SettingsSelectorItem
               isSelected={selectedSettingsOption === 'videos'}
-              onClick={() => setSelectedSettingsOption('videos')}
+              onClick={() => {
+                if (hasPaid) {
+                  setSelectedSettingsOption('videos')
+                } else {
+                  setShowingPayment(true)
+                }
+              }}
             >
-              Videos
+              Videos <Styled.PremiumMarker>Premium ⭐</Styled.PremiumMarker>
             </Styled.SettingsSelectorItem>
             {/* <Styled.SettingsSelectorItem
               isSelected={selectedSettingsOption === 'shortcuts'}
@@ -86,10 +93,11 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
           <Styled.BottomSelectorContainer>
             <Styled.SettingsSelectorItem
               onClick={() => setShowingPayment(true)}
+              small={true}
             >
-              Get Atlas Plus
+              Get Premium
             </Styled.SettingsSelectorItem>
-            <Styled.SettingsSelectorItem>
+            <Styled.SettingsSelectorItem small={true}>
               <Styled.FeedbackLink
                 href="https://docs.google.com/forms/d/17C8gtHkEb4NTWNB4DezZx2Zg3hcaI81XXOD1OAYG4TM/edit"
                 target="_blank"
@@ -98,10 +106,13 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
                 Give Feedback
               </Styled.FeedbackLink>
             </Styled.SettingsSelectorItem>
-            <Styled.SettingsSelectorItem onClick={() => setShowingDonate(true)}>
+            <Styled.SettingsSelectorItem
+              onClick={() => setShowingDonate(true)}
+              small={true}
+            >
               Donate
             </Styled.SettingsSelectorItem>
-            <Styled.SettingsSelectorItem onClick={signOut}>
+            <Styled.SettingsSelectorItem onClick={signOut} small={true}>
               Sign out
             </Styled.SettingsSelectorItem>
           </Styled.BottomSelectorContainer>

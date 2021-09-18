@@ -28,8 +28,6 @@ export const VideoSection: React.FC<ImageSectionProps> = ({
   selectedBackground,
   setSelectedBackground,
 }) => {
-  const { hasPaid } = useContext(SignedInContext)
-
   const [hasScrolled, setHasScrolled] = useState(false)
 
   useEffect(() => {
@@ -45,53 +43,49 @@ export const VideoSection: React.FC<ImageSectionProps> = ({
   const { data } = useGetVideosQuery()
   const videoData = data && data.getVideos
 
-  if (hasPaid) {
-    return (
-      <Styled.VideoSectionContainer>
-        <Styled.VideosHeader>Videos</Styled.VideosHeader>
-        <Styled.VideoSelectorContainer>
-          <Styled.SelectionOption
-            isSelected={selectedVideoOption === 'My Videos'}
-            onClick={() => setSelectedVideoOption('My Videos')}
-          >
-            My Videos
-          </Styled.SelectionOption>
-          <Styled.SelectionOption
-            isSelected={selectedVideoOption === 'Favorites'}
-            onClick={() => setSelectedVideoOption('Favorites')}
-          >
-            Favorites
-          </Styled.SelectionOption>
-        </Styled.VideoSelectorContainer>
-        {selectedVideoOption === 'My Videos' && (
-          <Styled.ContentContainer>
-            <UploadFile fileType="video" />
-            {videoData && videoData.length > 0 && !hasScrolled && (
-              <ScrollDownContainer>
-                <ScrollDownIndicator size={28} />
-              </ScrollDownContainer>
-            )}
-            <UserVideos
-              videoData={videoData}
-              selectedBackground={selectedBackground}
-              setSelectedBackground={setSelectedBackground}
-              filter="My Videos"
-            />
-          </Styled.ContentContainer>
-        )}
-        {selectedVideoOption === 'Favorites' && (
-          <Styled.ContentContainer>
-            <UserVideos
-              videoData={videoData}
-              selectedBackground={selectedBackground}
-              setSelectedBackground={setSelectedBackground}
-              filter="Favorites"
-            />
-          </Styled.ContentContainer>
-        )}
-      </Styled.VideoSectionContainer>
-    )
-  } else {
-    return <Styled.VideosHeader>This is a paid feature</Styled.VideosHeader>
-  }
+  return (
+    <Styled.VideoSectionContainer>
+      <Styled.VideosHeader>Videos</Styled.VideosHeader>
+      <Styled.VideoSelectorContainer>
+        <Styled.SelectionOption
+          isSelected={selectedVideoOption === 'My Videos'}
+          onClick={() => setSelectedVideoOption('My Videos')}
+        >
+          My Videos
+        </Styled.SelectionOption>
+        <Styled.SelectionOption
+          isSelected={selectedVideoOption === 'Favorites'}
+          onClick={() => setSelectedVideoOption('Favorites')}
+        >
+          Favorites
+        </Styled.SelectionOption>
+      </Styled.VideoSelectorContainer>
+      {selectedVideoOption === 'My Videos' && (
+        <Styled.ContentContainer>
+          <UploadFile fileType="video" />
+          {videoData && videoData.length > 0 && !hasScrolled && (
+            <ScrollDownContainer>
+              <ScrollDownIndicator size={28} />
+            </ScrollDownContainer>
+          )}
+          <UserVideos
+            videoData={videoData}
+            selectedBackground={selectedBackground}
+            setSelectedBackground={setSelectedBackground}
+            filter="My Videos"
+          />
+        </Styled.ContentContainer>
+      )}
+      {selectedVideoOption === 'Favorites' && (
+        <Styled.ContentContainer>
+          <UserVideos
+            videoData={videoData}
+            selectedBackground={selectedBackground}
+            setSelectedBackground={setSelectedBackground}
+            filter="Favorites"
+          />
+        </Styled.ContentContainer>
+      )}
+    </Styled.VideoSectionContainer>
+  )
 }

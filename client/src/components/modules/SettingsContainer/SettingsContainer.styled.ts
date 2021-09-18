@@ -55,8 +55,13 @@ export const SettingsSelectorColumn = styled.div`
   border-right: ${(props) => props.theme.dividerLine};
 `
 
-export const SettingsSelectorItem = styled.li<isSelectedProps>`
-  font-size: 1.2rem;
+interface SettingsSelectorItemProps {
+  small?: boolean
+}
+export const SettingsSelectorItem = styled.li<
+  isSelectedProps & SettingsSelectorItemProps
+>`
+  font-size: ${(props) => (props.small ? '.95rem' : '1.2rem')};
   padding: 0.5em;
   cursor: pointer;
   list-style: none;
@@ -67,6 +72,15 @@ export const SettingsSelectorItem = styled.li<isSelectedProps>`
   &:hover {
     filter: brightness(100%);
   }
+`
+
+export const PremiumMarker = styled.span`
+  font-size: 0.7rem;
+  margin-left: 10px;
+  padding: 2px;
+  border-radius: 3px;
+  color: ${(props) => props.theme.primaryText};
+  background-color: ${(props) => props.theme.secondaryContainer};
 `
 
 export const BottomSelectorContainer = styled.div``
@@ -82,7 +96,8 @@ export const SettingsDisplayColumn = styled.div<ContainerColorProps>`
 `
 
 export const FeedbackLink = styled.a`
-  font-size: 1.2rem;
+  font-size: 0.95rem;
+
   text-decoration: none;
   color: ${(props) => props.theme.secondaryText};
 `
