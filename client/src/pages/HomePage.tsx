@@ -19,7 +19,7 @@ import {
 } from '../providers'
 
 export const HomePage: React.FC = () => {
-  const { tokenAttached } = useContext(SignedInContext)
+  const { tokenAttached, setHasPaid } = useContext(SignedInContext)
   const { setTheme } = useContext(ThemeContext)
   const { componentVisiblity } = useContext(VisiblityToggleContext)
 
@@ -53,6 +53,8 @@ export const HomePage: React.FC = () => {
     if (userData?.colorTheme) setTheme(userData.colorTheme)
 
     if (userData?.greetingMessage) setGreetingMessage(userData.greetingMessage)
+
+    if (userData?.paymentType === 'paid') setHasPaid(true)
   }, [userData])
 
   return (

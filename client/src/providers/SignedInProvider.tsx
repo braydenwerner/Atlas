@@ -11,6 +11,10 @@ export const SignedInContext = createContext({
   signedIn: false,
   user: null as User,
   tokenAttached: false,
+  hasPaid: false,
+  setHasPaid: (hasPaid: boolean) => {
+    return
+  },
   updateTokenAttached: (attached: boolean) => {
     return
   },
@@ -19,6 +23,7 @@ export const SignedInContext = createContext({
 export const SignedInProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
   const [tokenAttached, setTokenAttached] = useState(false)
+  const [hasPaid, setHasPaid] = useState(false)
 
   const [signedIn, setSignedIn] = useLocalStorage('signedIn', false)
 
@@ -52,8 +57,15 @@ export const SignedInProvider: React.FC = ({ children }) => {
   }
 
   const signedInValue = useMemo(
-    () => ({ signedIn, user, tokenAttached, updateTokenAttached }),
-    [signedIn, user, tokenAttached, updateTokenAttached]
+    () => ({
+      signedIn,
+      user,
+      tokenAttached,
+      hasPaid,
+      setHasPaid,
+      updateTokenAttached,
+    }),
+    [signedIn, user, tokenAttached, hasPaid, setHasPaid, updateTokenAttached]
   )
   return (
     <SignedInContext.Provider value={signedInValue}>
