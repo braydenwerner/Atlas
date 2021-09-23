@@ -34,6 +34,7 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
   const [selectedVideoOption, setSelectedVideoOption] = useState('My Videos')
   const [showingDonate, setShowingDonate] = useState(false)
   const [showingPayment, setShowingPayment] = useState(false)
+  const [signOutConfirmation, setSignOutConfirmation] = useState()
 
   const signOut = async () => {
     localStorage.removeItem('greetingMessage')

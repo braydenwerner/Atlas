@@ -14,6 +14,7 @@ import { UpdateUserInput } from './UpdateUserInput'
 import { MyContext } from '../types'
 import { CreateUserInput } from './CreateUserInput'
 import { createToken, getUserId, stripe } from '../utils'
+import { __prod__ } from '../constants/constants'
 
 @ObjectType()
 class UserResponse {
@@ -108,7 +109,13 @@ export class UserResolver {
 
       await stripe.subscriptions.create({
         customer: customer.id,
-        items: [{ plan: process.env.STRIPE_PRICE_TEST }],
+        items: [
+          {
+            plan: __prod__
+              ? process.env.STRIPE_PRICE_PROD
+              : process.env.STRIPE_PRICE_TEST,
+          },
+        ],
         expand: ['latest_invoice.payment_intent'],
       })
 

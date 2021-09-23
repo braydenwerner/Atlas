@@ -1,11 +1,16 @@
 import * as jwt from 'jsonwebtoken'
-import { MyContext } from './types'
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_TEST!, {
-  apiVersion: '2020-08-27',
-  typescript: true,
-})
+import { MyContext } from './types'
+import { __prod__ } from './constants/constants'
+
+export const stripe = new Stripe(
+  __prod__ ? process.env.STRIPE_SECRET_PROD! : process.env.STRIPE_SECRET_TEST!,
+  {
+    apiVersion: '2020-08-27',
+    typescript: true,
+  }
+)
 
 export const getUserId = (ctx: MyContext) => {
   const Authorization = ctx.req.get('Authorization')

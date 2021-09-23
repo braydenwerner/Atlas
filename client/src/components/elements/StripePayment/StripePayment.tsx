@@ -57,13 +57,13 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
         color: '#fff',
         fontWeight: '500',
         fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-        fontSize: '16px',
+        fontSize: '20px',
         fontSmoothing: 'antialiased',
         ':-webkit-autofill': {
           color: '#fce883',
         },
         '::placeholder': {
-          color: '#87BBFD',
+          color: 'white',
         },
       },
       invalid: {

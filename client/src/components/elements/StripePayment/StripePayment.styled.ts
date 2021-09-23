@@ -57,7 +57,7 @@ export const ButtonContainer = styled.div`
 `
 
 export const PayButton = styled.button`
-  margin-top: 80px;
+  margin-top: 100px;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.8);
   width: 150px;
@@ -76,7 +76,7 @@ export const PayButton = styled.button`
 `
 
 export const BackButton = styled.div`
-  margin-top: 80px;
+  margin-top: 100px;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.8);
   width: 150px;
@@ -139,6 +139,7 @@ export const GmailIcon = styled(SiGmail)`
 `
 
 export const ErrorMessage = styled.div`
+  position: absolute;
   font-size: 1rem;
   margin-top: 20px;
   color: ${(props) => props.theme.primaryText};
