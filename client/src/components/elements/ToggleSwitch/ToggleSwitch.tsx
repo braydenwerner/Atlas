@@ -23,12 +23,14 @@ interface ToggleVisibilitySwitchProps {
     usingArmyTime: boolean
   }
   isVisibilityToggle: boolean
+  disabled?: boolean
 }
 
 export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
   visiblityComponent,
   otherSettingsComponent,
   isVisibilityToggle,
+  disabled,
 }) => {
   const { themeMode } = useContext(ThemeContext)
   const { componentVisiblity, toggleVisibility } = useContext(
@@ -38,6 +40,7 @@ export const ToggleSwitch: React.FC<ToggleVisibilitySwitchProps> = ({
 
   return (
     <Switch
+      disabled={disabled}
       checked={
         isVisibilityToggle
           ? visiblityComponent

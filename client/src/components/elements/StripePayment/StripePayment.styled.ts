@@ -1,5 +1,6 @@
 import { RiVideoUploadFill } from 'react-icons/ri'
-import { SiGooglecalendar, SiGmail } from 'react-icons/si'
+import { SiGmail } from 'react-icons/si'
+import { MdTrendingUp } from 'react-icons/md'
 import styled from 'styled-components'
 
 export const Header = styled.div`
@@ -118,7 +119,7 @@ export const VideoIcon = styled(RiVideoUploadFill)`
   }
 `
 
-export const CalenderIcon = styled(SiGooglecalendar)`
+export const StockIcon = styled(MdTrendingUp)`
   margin: auto;
   color: ${(props) => props.theme.primaryText};
   filter: brightness(85%);

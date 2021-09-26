@@ -1,95 +1,48 @@
-export {}
-// import { useState, useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import useLocalStorage from '../../../hooks/useLocalStorage'
 // import {
 //   getStockQuote,
 //   getStockCandleInfo,
-//   getCryptoCandleInfo,
+//   // getCryptoCandleInfo,
 // } from '../../../api/FinnhubAPI'
-// import { DynamicContainer } from '../../modules'
+import { DynamicContainer } from '../../modules'
 
-// import * as Styled from './StocksWidget.styled'
+import * as Styled from './StocksWidget.styled'
 
-// export const StocksWidget: React.FC = () => {
-//   //https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo
-//   const [stockData, setStockData] = useState([])
-//   const [stock, setStock] = useState('IBM')
+export const StocksWidget: React.FC = () => {
+  const [stock, setStock] = useLocalStorage('selectedStock', 'TSLA')
 
-//   const canvasRef = useRef() as any
+  const formRef = useRef() as React.MutableRefObject<HTMLInputElement>
 
-//   useEffect(() => {
-//     getStockData()
-//   }, [symbol])
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!formRef || !formRef.current) return
 
-//   useEffect(() => {
-//     const ctx = canvasRef.current
-//     const lineChart = new Chart(ctx, {
-//       type: 'line',
-//       data: {
-//         labels: [...Array(stockData.length).keys()].map(() => ''),
-//         datasets: [
-//           {
-//             label: '',
-//             data: stockData,
-//             borderColor: 'rgb(158, 228, 147)',
-//           },
-//         ],
-//       },
-//       options: {
-//         legend: {
-//           display: false,
-//         },
-//         scales: {
-//           yAxes: [
-//             {
-//               ticks: {
-//                 suggestedMin: Math.min(...stockData) * 0.95,
-//                 suggestedMax: Math.max(...stockData) * 1.05,
-//                 fontColor: 'WHITE',
-//               },
-//               scaleLabel: {
-//                 display: true,
-//                 fontColor: 'WHITE',
-//                 fontSize: 18,
-//                 labelString: 'Price',
-//               },
-//             },
-//           ],
-//           xAxes: [
-//             {
-//               ticks: {
-//                 fontColor: 'WHITE',
-//               },
-//               scaleLabel: {
-//                 display: true,
-//                 fontColor: 'WHITE',
-//                 fontSize: 18,
-//                 labelString: '',
-//               },
-//             },
-//           ],
-//         },
-//       },
-//     })
+    setStock(formRef.current.value)
+    formRef.current.value = ''
+  }
 
-//     return () => {
-//       lineChart.destroy()
-//     }
-//   }, [stockData])
-
-//   const getStockData = async () => {
-//     const stockData = await getStockData()
-//     console.log(stockData)
-//   }
-
-//   return (
-//     <DynamicContainer
-//       nodeTitle="StocksWidget"
-//       defaultLocation={{ x: 0.3, y: 0.3 }}
-//     >
-//       <Styled.StocksContainer>
-//         <div>stocks</div>
-//         <canvas id="chart" ref={canvasRef} width="900px" height="600px" />
-//       </Styled.StocksContainer>
-//     </DynamicContainer>
-//   )
-// }
+  return (
+    <DynamicContainer
+      nodeTitle="StocksWidget"
+      defaultLocation={{ x: 0.3, y: 0.3 }}
+    >
+      <Styled.StocksContainer>
+        <iframe
+          width="100%"
+          frameBorder="0"
+          height="400"
+          style={{ marginTop: '30px' }}
+          src={`https://widget.finnhub.io/widgets/stocks/chart?symbol=${stock}&watermarkColor=%231db954&backgroundColor=%23222222&textColor=white`}
+        />
+        <form onSubmit={handleFormSubmit}>
+          <Styled.Input
+            ref={formRef}
+            placeholder="Enter Stock Ticker"
+            // containerColor={containerColor}
+          />
+        </form>
+      </Styled.StocksContainer>
+    </DynamicContainer>
+  )
+}

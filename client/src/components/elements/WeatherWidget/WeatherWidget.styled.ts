@@ -82,6 +82,7 @@ export const Input = styled.input<ContainerColorProps>`
   background-color: ${(props) => props.theme.primaryContainer};
   background-color: ${(props) => props.containerColor};
 `
+
 export const IconWrapper = styled.div`
   width: 90%;
   display: flex;

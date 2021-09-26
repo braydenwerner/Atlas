@@ -9,6 +9,7 @@ import {
   SearchBar,
   WeatherWidget,
   Drawings,
+  StocksWidget,
 } from '../components/elements'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { TodoList, SettingsContainer, Notes } from '../components/modules'
@@ -90,7 +91,7 @@ export const HomePage: React.FC = () => {
         {componentVisiblity.showingNotes && <Notes />}
         {componentVisiblity.showingSearchbar && <SearchBar />}
         {componentVisiblity.showingDrawings && <Drawings />}
-        {/* {componentVisiblity.showingStocksWidget && <StocksWidget />} */}
+        {componentVisiblity.showingStocksWidget && <StocksWidget />}
       </DynamicContainerWrapper>
       <Background selectedBackground={selectedBackground} />
     </>

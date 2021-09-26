@@ -84,8 +84,8 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
             <Styled.Label>Video Uploads</Styled.Label>
           </Styled.IconLabelContainer>
           <Styled.IconLabelContainer>
-            <Styled.CalenderIcon size={68} />
-            <Styled.Label>Google Calender Widget</Styled.Label>
+            <Styled.StockIcon size={68} />
+            <Styled.Label>Interative Stocks Widget</Styled.Label>
           </Styled.IconLabelContainer>
           <Styled.IconLabelContainer>
             <Styled.GmailIcon size={68} />

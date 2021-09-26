@@ -25,3 +25,12 @@ export const ScrollDownIndicator = styled(BsChevronDoubleDown)`
   animation-duration: 0.9s;
   animation-iteration-count: infinite;
 `
+
+export const PremiumMarker = styled.span`
+  font-size: 0.7rem;
+  margin-left: 10px;
+  padding: 2px;
+  border-radius: 3px;
+  color: ${(props) => props.theme.primaryText};
+  background-color: ${(props) => props.theme.secondaryContainer};
+`

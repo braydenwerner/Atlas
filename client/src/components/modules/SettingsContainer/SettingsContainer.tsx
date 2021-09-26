@@ -9,6 +9,7 @@ import { ImageSection, GeneralSection, ShortcutSection } from '../index'
 import { VideoSection } from '../VideoSection/VideoSection'
 import { dev } from '../../../config/config'
 import * as Styled from './SettingsContainer.styled'
+import { PremiumMarker } from '../../../styles/constantStyles'
 
 interface SettingsContainerProps {
   selectedBackground: string | undefined
@@ -82,7 +83,7 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
                 }
               }}
             >
-              Videos <Styled.PremiumMarker>Premium ⭐</Styled.PremiumMarker>
+              Videos <PremiumMarker>Premium ⭐</PremiumMarker>
             </Styled.SettingsSelectorItem>
             {/* <Styled.SettingsSelectorItem
               isSelected={selectedSettingsOption === 'shortcuts'}
@@ -119,7 +120,12 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
           </Styled.BottomSelectorContainer>
         </Styled.SettingsSelectorColumn>
         <Styled.SettingsDisplayColumn containerColor={containerColor}>
-          {selectedSettingsOption === 'general' && <GeneralSection />}
+          {selectedSettingsOption === 'general' && (
+            <GeneralSection
+              hasPaid={hasPaid}
+              setShowingPayment={setShowingPayment}
+            />
+          )}
           {selectedSettingsOption === 'images' && (
             <ImageSection
               selectedImageOption={selectedImageOption}

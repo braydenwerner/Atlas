@@ -74,15 +74,6 @@ export const SettingsSelectorItem = styled.li<
   }
 `
 
-export const PremiumMarker = styled.span`
-  font-size: 0.7rem;
-  margin-left: 10px;
-  padding: 2px;
-  border-radius: 3px;
-  color: ${(props) => props.theme.primaryText};
-  background-color: ${(props) => props.theme.secondaryContainer};
-`
-
 export const BottomSelectorContainer = styled.div``
 
 export const SettingsDisplayColumn = styled.div<ContainerColorProps>`
