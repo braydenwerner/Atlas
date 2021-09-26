@@ -73,6 +73,7 @@ export type Mutation = {
   login: UserResponse;
   updateUser: Scalars['Boolean'];
   subscribe: UserResponse;
+  unsubscribe: UserResponse;
   createTodo: Todo;
   updateTodo: Scalars['Boolean'];
   deleteTodo: Scalars['Boolean'];
@@ -436,6 +437,23 @@ export type SubscribeMutationVariables = Exact<{
 export type SubscribeMutation = (
   { __typename?: 'Mutation' }
   & { subscribe: (
+    { __typename?: 'UserResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, user?: Maybe<(
+      { __typename?: 'UserAccount' }
+      & Pick<UserAccount, 'id' | 'email'>
+    )> }
+  ) }
+);
+
+export type UnsubscribeMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UnsubscribeMutation = (
+  { __typename?: 'Mutation' }
+  & { unsubscribe: (
     { __typename?: 'UserResponse' }
     & { errors?: Maybe<Array<(
       { __typename?: 'FieldError' }
@@ -1030,6 +1048,45 @@ export function useSubscribeMutation(baseOptions?: Apollo.MutationHookOptions<Su
 export type SubscribeMutationHookResult = ReturnType<typeof useSubscribeMutation>;
 export type SubscribeMutationResult = Apollo.MutationResult<SubscribeMutation>;
 export type SubscribeMutationOptions = Apollo.BaseMutationOptions<SubscribeMutation, SubscribeMutationVariables>;
+export const UnsubscribeDocument = gql`
+    mutation unsubscribe {
+  unsubscribe {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      email
+    }
+  }
+}
+    `;
+export type UnsubscribeMutationFn = Apollo.MutationFunction<UnsubscribeMutation, UnsubscribeMutationVariables>;
+
+/**
+ * __useUnsubscribeMutation__
+ *
+ * To run a mutation, you first call `useUnsubscribeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnsubscribeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unsubscribeMutation, { data, loading, error }] = useUnsubscribeMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUnsubscribeMutation(baseOptions?: Apollo.MutationHookOptions<UnsubscribeMutation, UnsubscribeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UnsubscribeMutation, UnsubscribeMutationVariables>(UnsubscribeDocument, options);
+      }
+export type UnsubscribeMutationHookResult = ReturnType<typeof useUnsubscribeMutation>;
+export type UnsubscribeMutationResult = Apollo.MutationResult<UnsubscribeMutation>;
+export type UnsubscribeMutationOptions = Apollo.BaseMutationOptions<UnsubscribeMutation, UnsubscribeMutationVariables>;
 export const UpdateDrawingDocument = gql`
     mutation updateDrawing($id: Int!, $data: UpdateDrawingInput!) {
   updateDrawing(id: $id, data: $data)

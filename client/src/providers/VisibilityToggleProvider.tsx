@@ -1,4 +1,5 @@
-import { createContext, useMemo } from 'react'
+import { createContext, useContext, useEffect, useMemo } from 'react'
+import { SignedInContext } from '.'
 
 import useLocalStorage from '../hooks/useLocalStorage'
 
@@ -18,6 +19,8 @@ export const VisiblityToggleContext = createContext({
 })
 
 export const VisibilityToggleProvider: React.FC = ({ children }) => {
+  const { hasPaid } = useContext(SignedInContext)
+
   const [componentVisiblity, setComponentVisiblity] = useLocalStorage(
     'componentVisibility',
     {
@@ -30,6 +33,13 @@ export const VisibilityToggleProvider: React.FC = ({ children }) => {
       showingStocksWidget: false,
     }
   )
+
+  useEffect(() => {
+    //  if the user unsubscribes, disable the paid features
+    if (componentVisiblity.showingStocksWidget && !hasPaid) {
+      toggleVisibility('StocksWidget')
+    }
+  }, [])
 
   const toggleVisibility = (component: string | undefined) => {
     switch (component) {

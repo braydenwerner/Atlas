@@ -1,0 +1,12 @@
+mutation unsubscribe {
+  unsubscribe {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      email
+    }
+  }
+}
