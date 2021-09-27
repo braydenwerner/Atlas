@@ -8,8 +8,12 @@ import { Donate, StripePayment } from '../../elements'
 import { ImageSection, GeneralSection, ShortcutSection } from '../index'
 import { VideoSection } from '../VideoSection/VideoSection'
 import { dev } from '../../../config/config'
-import * as Styled from './SettingsContainer.styled'
 import { PremiumMarker } from '../../../styles/constantStyles'
+import {
+  GetUserDocument,
+  useUnsubscribeMutation,
+} from '../../../generated/graphql'
+import * as Styled from './SettingsContainer.styled'
 
 interface SettingsContainerProps {
   selectedBackground: string | undefined
@@ -36,6 +40,9 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
   const [showingDonate, setShowingDonate] = useState(false)
   const [showingPayment, setShowingPayment] = useState(false)
   const [signOutConfirmation, setSignOutConfirmation] = useState()
+  const [showUnsubscribePopup, setShowUnsubscribePopup] = useState(false)
+
+  const [unsubscribe] = useUnsubscribeMutation()
 
   const signOut = async () => {
     localStorage.removeItem('greetingMessage')
@@ -54,6 +61,8 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
     //  is a lazy way to fix this
     window.location.reload()
   }
+
+  console.log('hasPaid: ', hasPaid)
 
   return (
     <>
@@ -93,12 +102,21 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
             </Styled.SettingsSelectorItem> */}
           </div>
           <Styled.BottomSelectorContainer>
-            <Styled.SettingsSelectorItem
-              onClick={() => setShowingPayment(true)}
-              small={true}
-            >
-              Get Premium
-            </Styled.SettingsSelectorItem>
+            {!hasPaid ? (
+              <Styled.SettingsSelectorItem
+                onClick={() => setShowingPayment(true)}
+                small={true}
+              >
+                Get Premium
+              </Styled.SettingsSelectorItem>
+            ) : (
+              <Styled.SettingsSelectorItem
+                onClick={() => setShowUnsubscribePopup(true)}
+                small={true}
+              >
+                Unsubscribe
+              </Styled.SettingsSelectorItem>
+            )}
             <Styled.SettingsSelectorItem small={true}>
               <Styled.FeedbackLink
                 href="https://docs.google.com/forms/d/17C8gtHkEb4NTWNB4DezZx2Zg3hcaI81XXOD1OAYG4TM/edit"
@@ -150,6 +168,36 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
         <Elements stripe={stripePromise}>
           <StripePayment setShowingPayment={setShowingPayment} />
         </Elements>
+      )}
+      {showUnsubscribePopup && (
+        <>
+          <Styled.UnsubscribePayment>
+            <Styled.UnsubscribeHeader>
+              Are you sure you want to unsubscribe from Atlas Premium?
+            </Styled.UnsubscribeHeader>
+            <Styled.ButtonContainer>
+              <Styled.CancelButton
+                onClick={() => setShowUnsubscribePopup(false)}
+              >
+                Cancel
+              </Styled.CancelButton>
+              <Styled.ConfirmButton
+                onClick={async () => {
+                  const response = await unsubscribe({
+                    refetchQueries: [{ query: GetUserDocument }],
+                  })
+                  console.log(response.data?.unsubscribe.errors)
+                  setShowUnsubscribePopup(false)
+                }}
+              >
+                Confirm
+              </Styled.ConfirmButton>
+            </Styled.ButtonContainer>
+          </Styled.UnsubscribePayment>
+          <Styled.CancelSubscriptionOverlay
+            onClick={() => setShowUnsubscribePopup(false)}
+          />
+        </>
       )}
     </>
   )

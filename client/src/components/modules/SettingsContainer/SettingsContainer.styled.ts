@@ -92,3 +92,80 @@ export const FeedbackLink = styled.a`
   text-decoration: none;
   color: ${(props) => props.theme.secondaryText};
 `
+
+export const UnsubscribePayment = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  width: 450px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  opacity: 0.98;
+  border-radius: 15px;
+  background-color: ${(props) => props.theme.primaryContainer};
+`
+
+export const UnsubscribeHeader = styled.div`
+  font-size: 1rem;
+  padding: 1em;
+  color: ${(props) => props.theme.primaryText};
+`
+
+export const CancelSubscriptionOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.75);
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+`
+
+export const CancelButton = styled.button`
+  margin-top: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  width: 150px;
+  text-align: center;
+  color: white;
+  font-size: 1.3rem;
+  padding: 0.2em;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+
+  color: ${(props) => props.theme.primaryText};
+
+  &:hover {
+    border: 1px solid white;
+  }
+`
+
+export const ConfirmButton = styled.button`
+  margin-top: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  width: 150px;
+  text-align: center;
+  color: white;
+  font-size: 1.3rem;
+  padding: 0.2em;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+
+  color: ${(props) => props.theme.primaryText};
+
+  &:hover {
+    border: 1px solid white;
+  }
+`

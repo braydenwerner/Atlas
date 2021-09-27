@@ -47,6 +47,7 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
       if (response.data && response.data.subscribe.errors) {
         setError(response.data.subscribe.errors[0].message)
       }
+      setShowingPayment(false)
     }
   }
 
