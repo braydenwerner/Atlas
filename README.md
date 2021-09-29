@@ -22,6 +22,8 @@
 - Light/Dark theme
 - Random high-quality background photos each day if you do not choose your own media
 
+&nbsp;
+
 # Premium Features:
 
 - Video uploads (mp4)
