@@ -6,7 +6,6 @@
 
 # What makes Atlas different?
 
-- All features are free
 - Upload your own videos (mp3) or images (png/jpeg) as your background
 - All containers are moveable and can be positioned anywhere on your screen
 - Auto-saving notes with a complete text editor supporting changing fonts, font sizes, formatting, etc.
@@ -14,7 +13,7 @@
 
 &nbsp;
 
-# Additional Features:
+# Features:
 
 - Information saved across multiple devices
 - Weather widget
@@ -22,6 +21,11 @@
 - To-do list
 - Light/Dark theme
 - Random high-quality background photos each day if you do not choose your own media
+
+# Premium Features:
+
+- Video uploads (mp4)
+- Interactive stock checker widget
 
 &nbsp;
 

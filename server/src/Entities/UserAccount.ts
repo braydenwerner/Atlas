@@ -57,6 +57,10 @@ export class UserAccount extends BaseEntity {
   @Column({ nullable: true })
   stripeId: string
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  subscriptionId: string
+
   @Field({ defaultValue: 'unpaid' })
   @Column({ default: 'unpaid' })
   paymentType: string

@@ -107,7 +107,7 @@ export class UserResolver {
         },
       })
 
-      await stripe.subscriptions.create({
+      const subscription = await stripe.subscriptions.create({
         customer: customer.id,
         items: [
           {
@@ -124,6 +124,7 @@ export class UserResolver {
         {
           stripeId: customer.id,
           paymentType: 'paid',
+          subscriptionId: subscription.id,
         }
       )
     } catch (e) {
@@ -132,6 +133,50 @@ export class UserResolver {
         errors: [{ field: 'subscribe', message: e }],
       }
     }
+
+    return { user }
+  }
+
+  @Mutation(() => UserResponse)
+  async unsubscribe(@Ctx() ctx: MyContext) {
+    const uid = getUserId(ctx)
+
+    const user = await UserAccount.findOne({ uid })
+
+    if (!user) {
+      return {
+        errors: [{ field: 'unsubscribe', message: 'Could not find user' }],
+      }
+    }
+
+    if (!user.subscriptionId) {
+      return {
+        errors: [
+          {
+            field: 'unsubscribe',
+            message: "The user's subscriptionId does not exist",
+          },
+        ],
+      }
+    }
+
+    if (user.paymentType === 'unpaid') {
+      return {
+        errors: [
+          { field: 'unsubscribe', message: 'The user is unpaid already' },
+        ],
+      }
+    }
+
+    stripe.subscriptions.del(user.subscriptionId)
+
+    await UserAccount.update(
+      { uid },
+      {
+        paymentType: 'unpaid',
+        subscriptionId: undefined,
+      }
+    )
 
     return { user }
   }
