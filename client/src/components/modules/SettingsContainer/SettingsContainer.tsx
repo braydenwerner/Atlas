@@ -62,8 +62,6 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
     window.location.reload()
   }
 
-  console.log('hasPaid: ', hasPaid)
-
   return (
     <>
       <Styled.SettingsArrowIcon size={28} $containerColor={containerColor} />
