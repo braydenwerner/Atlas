@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import { CircularProgress } from '@material-ui/core'
 
 import {
   GetUserDocument,
@@ -15,6 +16,7 @@ interface StripePaymentProps {
 export const StripePayment: React.FC<StripePaymentProps> = ({
   setShowingPayment,
 }) => {
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | undefined | null>()
 
   const stripe = useStripe()
@@ -40,10 +42,12 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
     }
 
     if (paymentMethod) {
+      setLoading(true)
       const response = await subscribe({
         variables: { paymentId: paymentMethod.id },
         refetchQueries: [{ query: GetUserDocument }],
       })
+      setLoading(false)
       if (response.data && response.data.subscribe.errors) {
         setError(response.data.subscribe.errors[0].message)
       }
@@ -96,18 +100,24 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
         <Styled.SubTitle>
           Unlock the features above for only $1.00/month
         </Styled.SubTitle>
-        <Styled.PaymentForm onSubmit={handleSubmit}>
-          <CardElement options={cardElementOptions} />
-          <Styled.ErrorMessage>{error}</Styled.ErrorMessage>
-          <Styled.ButtonContainer>
-            <Styled.PayButton type="submit" disabled={!stripe || !elements}>
-              Upgrade
-            </Styled.PayButton>
-            <Styled.BackButton onClick={() => setShowingPayment(false)}>
-              No Thanks
-            </Styled.BackButton>
-          </Styled.ButtonContainer>
-        </Styled.PaymentForm>
+        {!loading ? (
+          <Styled.PaymentForm onSubmit={handleSubmit}>
+            <CardElement options={cardElementOptions} />
+            <Styled.ErrorMessage>{error}</Styled.ErrorMessage>
+            <Styled.ButtonContainer>
+              <Styled.PayButton type="submit" disabled={!stripe || !elements}>
+                Upgrade
+              </Styled.PayButton>
+              <Styled.BackButton onClick={() => setShowingPayment(false)}>
+                No Thanks
+              </Styled.BackButton>
+            </Styled.ButtonContainer>
+          </Styled.PaymentForm>
+        ) : (
+          <Styled.LoadingContainer>
+            <CircularProgress size={100} />
+          </Styled.LoadingContainer>
+        )}
       </Styled.PaymentContainer>
       <Styled.PaymentOverlay onClick={() => setShowingPayment(false)} />
     </>

@@ -31,7 +31,7 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
   setSelectedBackground,
 }) => {
   const { containerColor } = useContext(OtherSettingsContext)
-  const { hasPaid } = useContext(SignedInContext)
+  const { hasPaid, setHasPaid } = useContext(SignedInContext)
 
   const [selectedSettingsOption, setSelectedSettingsOption] =
     useState('general')
@@ -181,11 +181,17 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
               </Styled.CancelButton>
               <Styled.ConfirmButton
                 onClick={async () => {
+                  //  this query not refetching for some reason
                   const response = await unsubscribe({
                     refetchQueries: [{ query: GetUserDocument }],
                   })
-                  console.log(response.data?.unsubscribe.errors)
-                  setShowUnsubscribePopup(false)
+                  console.log(response)
+
+                  if (!response.data?.unsubscribe.errors) {
+                    //  change this later
+                    setHasPaid(false)
+                    setShowUnsubscribePopup(false)
+                  }
                 }}
               >
                 Confirm

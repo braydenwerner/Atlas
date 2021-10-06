@@ -145,3 +145,7 @@ export const ErrorMessage = styled.div`
   margin-top: 20px;
   color: ${(props) => props.theme.primaryText};
 `
+
+export const LoadingContainer = styled.div`
+  margin-top: 75px;
+`
