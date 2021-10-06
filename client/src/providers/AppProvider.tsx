@@ -9,15 +9,15 @@ import {
 
 export const AppProvider: React.FC = ({ children }) => {
   return (
-    <ThemeProvider>
-      <SignedInProvider>
+    <SignedInProvider>
+      <ThemeProvider>
         <VisibilityToggleProvider>
           <OtherSettingsProvider>
             <GlobalStyles />
             {children}
           </OtherSettingsProvider>
         </VisibilityToggleProvider>
-      </SignedInProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SignedInProvider>
   )
 }

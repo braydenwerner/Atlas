@@ -17,7 +17,7 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
   hasPaid,
   setShowingPayment,
 }) => {
-  const { themeMode, setTheme } = useContext(ThemeContext)
+  const { themeMode, setTheme, setCurrentFont } = useContext(ThemeContext)
   const {
     usingDigitalClock,
     setUsingDigitalClock,
@@ -207,6 +207,24 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
               )}
             </Styled.ThemeColorSliderContainer>
           </Styled.CustomizationColumn>
+          <Styled.CustomizationRow>
+            <Styled.CustomizationLabel>Font</Styled.CustomizationLabel>
+            <Styled.SubOptionContainer>
+              <Styled.SubOption
+                isSelected={usingDigitalClock}
+                onClick={() => setCurrentFont('Gemunu Libre')}
+              >
+                Simple
+              </Styled.SubOption>
+              <Styled.SubOption
+                style={{ marginRight: '12px' }}
+                isSelected={!usingDigitalClock}
+                onClick={() => setCurrentFont('Open Sans')}
+              >
+                Startup
+              </Styled.SubOption>
+            </Styled.SubOptionContainer>
+          </Styled.CustomizationRow>
           <Styled.CustomizationRow>
             <Styled.CustomizationLabel>
               Greeting Clock

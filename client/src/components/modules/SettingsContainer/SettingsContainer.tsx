@@ -185,7 +185,6 @@ export const SettingsContainer: React.FC<SettingsContainerProps> = ({
                   const response = await unsubscribe({
                     refetchQueries: [{ query: GetUserDocument }],
                   })
-                  console.log(response)
 
                   if (!response.data?.unsubscribe.errors) {
                     //  change this later

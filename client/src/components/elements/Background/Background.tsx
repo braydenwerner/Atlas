@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import moment from 'moment'
 
-import { OtherSettingsContext } from '../../../providers'
+import { OtherSettingsContext, SignedInContext } from '../../../providers'
 import { getWallpaperData } from '../../../api/UnsplashAPI'
 import defaultBackground from '../../../images/atlas-background.jpg'
 import * as Styled from './Background.styled'
@@ -19,6 +19,8 @@ interface BackgroundProps {
 
 export const Background: React.FC<BackgroundProps> = React.memo(
   ({ selectedBackground }) => {
+    const { hasPaid } = useContext(SignedInContext)
+
     const { componentToggleState, randomWallpaperURL, setRandomWallpaperURL } =
       useContext(OtherSettingsContext)
 
@@ -88,7 +90,9 @@ export const Background: React.FC<BackgroundProps> = React.memo(
     ) {
       return <Styled.BackgroundImage image={randomWallpaper} />
     } else {
-      if (selectedBackground && selectedBackground.endsWith('mp4')) {
+      //  if the user changes the visiblity in local storage but
+      //  does not have premium, make sure they have paid
+      if (hasPaid && selectedBackground && selectedBackground.endsWith('mp4')) {
         return (
           <Styled.Video ref={videoRef} autoPlay={true} loop muted>
             <source src={selectedBackground} type="video/mp4" />
