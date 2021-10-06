@@ -12,6 +12,7 @@ import { SignedInContext } from '../../../providers'
 import { CustomTextField } from '../../elements/index'
 import * as Styled from './Login.styled'
 import { Alert } from '@material-ui/lab'
+import { BiErrorCircle } from 'react-icons/bi'
 
 interface FormSubmitData {
   name: string
@@ -259,9 +260,22 @@ export const Login: React.FC = () => {
                 </Styled.ButtonContainer>
               </Styled.LoginPromptContainer>
               <Styled.ErrorMessageContainer>
-                <Styled.ErrorMessage>{errors.name}</Styled.ErrorMessage>
-                <Styled.ErrorMessage>{errors.email}</Styled.ErrorMessage>
-                <Styled.ErrorMessage>{errors.password}</Styled.ErrorMessage>
+                <Styled.ErrorMessageInnerContainer>
+                  {errors.name && <BiErrorCircle color="white" size={32} />}
+                  <Styled.ErrorMessage>{errors.name}</Styled.ErrorMessage>
+                </Styled.ErrorMessageInnerContainer>
+              </Styled.ErrorMessageContainer>
+              <Styled.ErrorMessageContainer>
+                <Styled.ErrorMessageInnerContainer>
+                  {errors.email && <BiErrorCircle color="white" size={32} />}
+                  <Styled.ErrorMessage>{errors.email}</Styled.ErrorMessage>
+                </Styled.ErrorMessageInnerContainer>
+              </Styled.ErrorMessageContainer>
+              <Styled.ErrorMessageContainer>
+                <Styled.ErrorMessageInnerContainer>
+                  {errors.password && <BiErrorCircle color="white" size={32} />}
+                  <Styled.ErrorMessage>{errors.password}</Styled.ErrorMessage>
+                </Styled.ErrorMessageInnerContainer>
               </Styled.ErrorMessageContainer>
             </Form>
           )}
