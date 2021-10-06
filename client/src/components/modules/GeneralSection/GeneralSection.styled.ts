@@ -36,7 +36,6 @@ export const CustomizationRow = styled.div<CustomizationRowProps>`
   display: flex;
   align-items: center;
   font-size: 1.3 rem;
-  height: 40px;
   width: 95%;
   margin: 10px 0px 10px 0px;
   ${(props) =>
@@ -66,9 +65,17 @@ export const SubOptionContainer = styled.div`
   width: 50%;
 `
 
+export const SubOptionGridContainer = styled.div`
+  display: grid;
+  text-align: center;
+  width: 100%;
+  margin-top: 15px;
+  grid-template-columns: repeat(3, 90px [col-start]);
+`
+
 export const SubOption = styled.div<isSelectedProps>`
   font-size: 1rem;
-  padding: 0.5em;
+  padding: 0.4em;
   cursor: pointer;
   color: ${(props) =>
     props.isSelected ? props.theme.primaryText : props.theme.secondaryText};

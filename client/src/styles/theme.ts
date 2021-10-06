@@ -1,17 +1,7 @@
 export type ThemeType = typeof theme['light']
 
-// let currentFont = 'Open Sans'
-
-// export const setFont = (font: string) => {
-//   currentFont = font
-//   theme.dark.currentFont = font
-//   theme.light.currentFont = font
-//   console.log(theme.dark.currentFont)
-// }
-
 export const common = {
   red: '#C6493A',
-  // currentFont,
 }
 
 const theme = {

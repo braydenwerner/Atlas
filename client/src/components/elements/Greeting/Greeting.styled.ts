@@ -31,7 +31,7 @@ export const GreetingsContainer = styled.div<ClockProps>`
   width: 320px;
   max-height: 300px;
   user-select: none;
-  height: ${(props) => (props.$usingDigitalClock ? '250px' : '300px')};
+  height: ${(props) => (props.$usingDigitalClock ? '270px' : '320px')};
 `
 
 export const TimeContainer = styled.div<ColorProps>`
@@ -78,7 +78,7 @@ export const GreetingIconsContainer = styled.div<ClockProps>`
   position: absolute;
   justify-content: space-around;
   width: 100px;
-  margin-top: 25px;
+  margin-top: 55px;
   top: ${(props) => (props.$usingDigitalClock ? '205px' : '260px')};
 `
 

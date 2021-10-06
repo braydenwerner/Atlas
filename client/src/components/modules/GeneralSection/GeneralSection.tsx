@@ -207,23 +207,55 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
               )}
             </Styled.ThemeColorSliderContainer>
           </Styled.CustomizationColumn>
-          <Styled.CustomizationRow>
-            <Styled.CustomizationLabel>Font</Styled.CustomizationLabel>
-            <Styled.SubOptionContainer>
-              <Styled.SubOption
-                isSelected={usingDigitalClock}
-                onClick={() => setCurrentFont('Gemunu Libre')}
-              >
-                Simple
-              </Styled.SubOption>
+          <Styled.CustomizationRow
+            onClick={() => {
+              if (!hasPaid) {
+                setShowingPayment(true)
+              }
+            }}
+          >
+            <Styled.CustomizationLabel>
+              Font <PremiumMarker>Premium ⭐</PremiumMarker>
+            </Styled.CustomizationLabel>
+            <Styled.SubOptionGridContainer>
               <Styled.SubOption
                 style={{ marginRight: '12px' }}
                 isSelected={!usingDigitalClock}
                 onClick={() => setCurrentFont('Open Sans')}
               >
-                Startup
+                Default
               </Styled.SubOption>
-            </Styled.SubOptionContainer>
+              <Styled.SubOption
+                isSelected={!usingDigitalClock}
+                onClick={() => setCurrentFont('Indie Flower')}
+              >
+                Marker
+              </Styled.SubOption>
+              <Styled.SubOption
+                isSelected={!usingDigitalClock}
+                onClick={() => setCurrentFont('Staatliches')}
+              >
+                Bold
+              </Styled.SubOption>
+              <Styled.SubOption
+                isSelected={!usingDigitalClock}
+                onClick={() => setCurrentFont('Orbitron')}
+              >
+                Tech
+              </Styled.SubOption>
+              <Styled.SubOption
+                isSelected={!usingDigitalClock}
+                onClick={() => setCurrentFont('Alice')}
+              >
+                Fancy
+              </Styled.SubOption>
+              <Styled.SubOption
+                isSelected={!usingDigitalClock}
+                onClick={() => setCurrentFont('Norican')}
+              >
+                Cursive
+              </Styled.SubOption>
+            </Styled.SubOptionGridContainer>
           </Styled.CustomizationRow>
           <Styled.CustomizationRow>
             <Styled.CustomizationLabel>
