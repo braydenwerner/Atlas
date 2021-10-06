@@ -58,15 +58,17 @@ export const ButtonContainer = styled.div`
 `
 
 export const PayButton = styled.button`
-  margin-top: 80px;
+  position: absolute;
+  bottom: 50px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-right: 190px;
   width: 150px;
   text-align: center;
   color: white;
   font-size: 1.3rem;
   padding: 0.2em;
   border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   background-color: rgba(255, 255, 255, 0.05);
 
   color: ${(props) => props.theme.primaryText};
@@ -77,15 +79,17 @@ export const PayButton = styled.button`
 `
 
 export const BackButton = styled.div`
-  margin-top: 80px;
+  position: absolute;
+  bottom: 50px;
+  margin-left: 190px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.8);
   width: 150px;
   text-align: center;
   color: white;
   font-size: 1.3rem;
   padding: 0.2em;
   border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   background-color: rgba(255, 255, 255, 0.05);
 
   color: ${(props) => props.theme.primaryText};
