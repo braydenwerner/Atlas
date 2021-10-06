@@ -17,7 +17,8 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
   hasPaid,
   setShowingPayment,
 }) => {
-  const { themeMode, setTheme, setCurrentFont } = useContext(ThemeContext)
+  const { themeMode, setTheme, currentFont, setCurrentFont } =
+    useContext(ThemeContext)
   const {
     usingDigitalClock,
     setUsingDigitalClock,
@@ -219,38 +220,37 @@ export const GeneralSection: React.FC<GeneralSectionProps> = ({
             </Styled.CustomizationLabel>
             <Styled.SubOptionGridContainer>
               <Styled.SubOption
-                style={{ marginRight: '12px' }}
-                isSelected={!usingDigitalClock}
+                isSelected={currentFont === 'Open Sans'}
                 onClick={() => setCurrentFont('Open Sans')}
               >
                 Default
               </Styled.SubOption>
               <Styled.SubOption
-                isSelected={!usingDigitalClock}
+                isSelected={currentFont === 'Indie Flower'}
                 onClick={() => setCurrentFont('Indie Flower')}
               >
                 Marker
               </Styled.SubOption>
               <Styled.SubOption
-                isSelected={!usingDigitalClock}
+                isSelected={currentFont === 'Staatliches'}
                 onClick={() => setCurrentFont('Staatliches')}
               >
                 Bold
               </Styled.SubOption>
               <Styled.SubOption
-                isSelected={!usingDigitalClock}
-                onClick={() => setCurrentFont('Orbitron')}
+                isSelected={currentFont === 'Rajdhani'}
+                onClick={() => setCurrentFont('Rajdhani')}
               >
                 Tech
               </Styled.SubOption>
               <Styled.SubOption
-                isSelected={!usingDigitalClock}
+                isSelected={currentFont === 'Alice'}
                 onClick={() => setCurrentFont('Alice')}
               >
                 Fancy
               </Styled.SubOption>
               <Styled.SubOption
-                isSelected={!usingDigitalClock}
+                isSelected={currentFont === 'Norican'}
                 onClick={() => setCurrentFont('Norican')}
               >
                 Cursive

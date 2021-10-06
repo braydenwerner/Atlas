@@ -27,8 +27,9 @@ export const ScrollDownIndicator = styled(BsChevronDoubleDown)`
 `
 
 export const PremiumMarker = styled.span`
+  align-self: center;
+  justify-self: center;
   font-size: 0.7rem;
-  margin-left: 10px;
   padding: 2px;
   border-radius: 3px;
   color: ${(props) => props.theme.primaryText};

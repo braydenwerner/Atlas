@@ -93,8 +93,8 @@ export const StripePayment: React.FC<StripePaymentProps> = ({
             <Styled.Label>Interative Stocks Widget</Styled.Label>
           </Styled.IconLabelContainer>
           <Styled.IconLabelContainer>
-            <Styled.GmailIcon size={68} />
-            <Styled.Label>Gmail Widget</Styled.Label>
+            <Styled.FontIcon size={68} />
+            <Styled.Label>Unlock fonts</Styled.Label>
           </Styled.IconLabelContainer>
         </Styled.IconContainer>
         <Styled.SubTitle>

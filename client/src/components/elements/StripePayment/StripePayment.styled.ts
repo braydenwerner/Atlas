@@ -1,5 +1,5 @@
 import { RiVideoUploadFill } from 'react-icons/ri'
-import { SiGmail } from 'react-icons/si'
+import { AiOutlineFontSize } from 'react-icons/ai'
 import { MdTrendingUp } from 'react-icons/md'
 import styled from 'styled-components'
 
@@ -129,7 +129,7 @@ export const StockIcon = styled(MdTrendingUp)`
   }
 `
 
-export const GmailIcon = styled(SiGmail)`
+export const FontIcon = styled(AiOutlineFontSize)`
   margin: auto;
   color: ${(props) => props.theme.primaryText};
   filter: brightness(85%);
