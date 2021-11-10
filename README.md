@@ -28,7 +28,7 @@
 
 - Video uploads (mp4)
 - Interactive stock checker widget
-- Unlock Fonts
+- Unlock new fonts
 
 &nbsp;
 
