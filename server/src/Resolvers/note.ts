@@ -4,6 +4,7 @@ import { MyContext } from '../types'
 import { Note } from '../Entities/index'
 import { UpdateNoteInput } from './UpdateNoteInput'
 import { getUserId } from '../utils'
+import { MAX_NOTES } from '../constants/constants'
 
 @Resolver()
 export class NoteResolver {
@@ -14,9 +15,12 @@ export class NoteResolver {
     return Note.find({ uid })
   }
 
-  @Mutation(() => Note)
-  createNote(@Ctx() ctx: MyContext) {
+  @Mutation(() => Note, { nullable: true })
+  async createNote(@Ctx() ctx: MyContext) {
     const uid = getUserId(ctx)
+
+    const notes = await Note.find({ uid })
+    if (notes.length > MAX_NOTES) return null
 
     return Note.create({ uid }).save()
   }
