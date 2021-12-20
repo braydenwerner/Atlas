@@ -6,7 +6,7 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://stripe.com/ https://js.stripe.com/ https://checkout.stripe.com/; object-src 'self'",
   "browser_action": {
