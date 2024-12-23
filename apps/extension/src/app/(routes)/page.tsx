@@ -1,4 +1,4 @@
-import { db } from "@acme/db";
+import { db } from "@atlas/db";
 
 import { CreatePostForm, PostCard } from "~/features/posts";
 import { AuthShowcase } from "~/features/profile";

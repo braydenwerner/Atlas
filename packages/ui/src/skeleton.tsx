@@ -1,4 +1,4 @@
-import { cn } from "@acme/utils";
+import { cn } from "@atlas/utils";
 
 function Skeleton({
   className,

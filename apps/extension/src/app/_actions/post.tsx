@@ -1,9 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { db } from "@atlas/db";
 import { z } from "zod";
-
-import { db } from "@acme/db";
 
 import { validate } from "~/lib/validateServerAction";
 

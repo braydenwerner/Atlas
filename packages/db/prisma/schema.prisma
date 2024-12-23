@@ -2,14 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["jsonProtocol"]
+    provider = "prisma-client-js"
 }
 
 datasource db {
-    provider     = "mysql"
+    provider     = "postgres"
     url          = env("DATABASE_URL")
     relationMode = "prisma"
+    directUrl    = env("DIRECT_URL")
 }
 
 model Post {

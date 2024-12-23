@@ -1,8 +1,7 @@
 "use client";
 
+import { Button } from "@atlas/ui";
 import { signIn, signOut, useSession } from "next-auth/react";
-
-import { Button } from "@acme/ui";
 
 export function AuthShowcase() {
   const { data } = useSession();

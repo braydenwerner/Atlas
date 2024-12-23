@@ -1,8 +1,7 @@
+import { db } from "@atlas/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type DefaultSession, type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
-
-import { db } from "@acme/db";
 
 import { env } from "../env.mjs";
 

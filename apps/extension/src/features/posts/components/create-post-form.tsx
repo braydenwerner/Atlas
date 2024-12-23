@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
-import { Button, Input } from "@acme/ui";
+import { Button, Input } from "@atlas/ui";
 
 import { createPost } from "~/app/_actions/post";
 import { useValidatedAction } from "~/hooks/useValidatedAction";

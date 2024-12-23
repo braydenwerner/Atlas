@@ -1,7 +1,7 @@
 "use client";
 
-import { type Post } from "@acme/db";
-import { Button } from "@acme/ui";
+import { type Post } from "@atlas/db";
+import { Button } from "@atlas/ui";
 
 import { deletePost } from "~/app/_actions/post";
 import { useValidatedAction } from "~/hooks/useValidatedAction";

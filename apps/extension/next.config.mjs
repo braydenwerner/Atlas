@@ -1,6 +1,6 @@
 // Importing env files here to validate on build
 import "./src/env.mjs";
-import "@acme/auth/env.mjs";
+import "@atlas/auth/env.mjs";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -10,7 +10,7 @@ import "@acme/auth/env.mjs";
 const config = {
   reactStrictMode: true,
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@acme/auth", "@acme/db", "@acme/utils", "@acme/ui"],
+  transpilePackages: ["@atlas/auth", "@atlas/db", "@atlas/utils", "@atlas/ui"],
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },

@@ -1,15 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { useTheme } from "next-themes";
-
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@acme/ui";
+} from "@atlas/ui";
+import { useTheme } from "next-themes";
 
 import { Icons } from "~/features/ui";
 

@@ -1,10 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { cn } from "@atlas/utils";
 import * as MenubarPrimitive from "@radix-ui/react-menubar";
 import { Check, ChevronRight, Circle } from "lucide-react";
-
-import { cn } from "@acme/utils";
 
 const MenubarMenu = MenubarPrimitive.Menu;
 

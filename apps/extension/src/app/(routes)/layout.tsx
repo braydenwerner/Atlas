@@ -1,10 +1,11 @@
-import { TailwindIndicator, Toaster } from "@acme/ui";
-import { cn } from "@acme/utils";
+import { TailwindIndicator, Toaster } from "@atlas/ui";
+import { cn } from "@atlas/utils";
 
 import { siteConfig } from "~/config/site";
 import { fontSans } from "~/lib/fonts";
 import { AuthSessionProvider } from "~/providers/auth-session-provider";
 import { ThemeProvider } from "~/providers/theme-provider";
+
 import "~/styles/globals.css";
 
 export const metadata = {

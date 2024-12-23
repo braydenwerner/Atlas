@@ -39,7 +39,7 @@ packages
 
 > You are able to add more apps under the `apps` directory, which may use the packages in the `packages` folder.
 
-> `@acme` is a placeholder for package names. You can replace it with your own organization or project name. You can use find-and-replace to change all the instances of `@acme/` to something like `@my-company/` or `@project-name/`.
+> `@atlas` is a placeholder for package names. You can replace it with your own organization or project name. You can use find-and-replace to change all the instances of `@atlas/` to something like `@my-company/` or `@project-name/`.
 
 ## Quick Start
 
