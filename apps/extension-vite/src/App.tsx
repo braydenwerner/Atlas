@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@atlas/ui/src/button";
 
@@ -7,8 +7,34 @@ import viteLogo from "/vite.svg";
 
 import "./App.css";
 
+import { createClient } from "@supabase/supabase-js";
+
+import env from "./env";
+import { Database } from "./types/database.types";
+
+const supabase = createClient<Database>(
+  env.VITE_SUPABASE_URL,
+  env.VITE_SUPABASE_PUBLIC_ANON_KEY,
+);
+
 function App() {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    // supabase.auth.onAuthStateChange((event, session) => {
+    //   console.log(event, session);
+    // });
+    async function test() {
+      const data = await supabase
+        .from("Post")
+        .select("*")
+        .then((res) => {
+          console.log(res);
+        });
+      console.log(data);
+    }
+    test();
+  }, []);
 
   return (
     <>
