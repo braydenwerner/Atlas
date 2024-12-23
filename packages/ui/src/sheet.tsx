@@ -1,10 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@atlas/utils";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
+
+import { cn } from "@atlas/utils";
 
 const Sheet = SheetPrimitive.Root;
 
@@ -26,13 +27,8 @@ interface SheetPortalProps
   extends SheetPrimitive.DialogPortalProps,
     VariantProps<typeof portalVariants> {}
 
-const SheetPortal = ({
-  position,
-  className,
-  children,
-  ...props
-}: SheetPortalProps) => (
-  <SheetPrimitive.Portal className={cn(className)} {...props}>
+const SheetPortal = ({ position, children, ...props }: SheetPortalProps) => (
+  <SheetPrimitive.Portal {...props}>
     <div className={portalVariants({ position })}>{children}</div>
   </SheetPrimitive.Portal>
 );

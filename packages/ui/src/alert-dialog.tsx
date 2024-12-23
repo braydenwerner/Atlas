@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@atlas/utils";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
+
+import { cn } from "@atlas/utils";
 
 import { buttonVariants } from "./button";
 
@@ -11,11 +12,10 @@ const AlertDialog = AlertDialogPrimitive.Root;
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 
 const AlertDialogPortal = ({
-  className,
   children,
   ...props
 }: AlertDialogPrimitive.AlertDialogPortalProps) => (
-  <AlertDialogPrimitive.Portal className={cn(className)} {...props}>
+  <AlertDialogPrimitive.Portal {...props}>
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       {children}
     </div>

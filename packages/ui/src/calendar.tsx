@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@atlas/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
+
+import { cn } from "@atlas/utils";
 
 import { buttonVariants } from "./button";
 
@@ -52,10 +53,12 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
+        IconLeft: ({ ...props }) => (
+          <ChevronLeft className="h-4 w-4" {...props} />
+        ),
+        IconRight: ({ ...props }) => (
+          <ChevronRight className="h-4 w-4" {...props} />
+        ),
       }}
       {...props}
     />
